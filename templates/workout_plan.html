@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}FitCoach IA - Programme d'entraînement{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/workout_plan.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="workout-container">
+    <div class="page-header">
+        <h1>{% if plan %}{{ plan.title }}{% else %}Nouveau programme d'entraînement{% endif %}</h1>
+        <div class="header-actions">
+            {% if plan %}
+            <a href="{{ url_for('edit_workout_plan', plan_id=plan.id) }}" class="btn btn-secondary">
+                <i class="fas fa-edit"></i> Modifier
+            </a>
+            {% endif %}
+            <a href="{{ url_for('workout_plans') }}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Retour aux programmes
+            </a>
+        </div>
+    </div>
+
+    {% if plan %}
+    <div class="plan-details">
+        <div class="plan-meta">
+            <div class="meta-item">
+                <span class="meta-icon"><i class="fas fa-bullseye"></i></span>
+                <span class="meta-label">Objectif:</span>
+                <span class="meta-value">
+                    {% if plan.objective == 'perte_de_poids' %}Perte de poids
+                    {% elif plan.objective == 'prise_de_muscle' %}Prise de muscle
+                    {% elif plan.objective == 'endurance' %}Amélioration de l'endurance
+                    {% elif plan.objective == 'force' %}Développement de la force
+                    {% elif plan.objective == 'sante' %}Santé générale
+                    {% elif plan.objective == 'mobilite' %}Amélioration de la mobilité
+                    {% else %}{{ plan.objective }}{% endif %}
+                </span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-icon"><i class="fas fa-calendar-alt"></i></span>
+                <span class="meta-label">Fréquence:</span>
+                <span class="meta-value">{{ plan.days_per_week }} jours/semaine</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-icon"><i class="fas fa-clock"></i></span>
+                <span class="meta-label">Durée:</span>
+                <span class="meta-value">{{ plan.duration_minutes }} minutes</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-icon"><i class="fas fa-signal"></i></span>
+                <span class="meta-label">Niveau:</span>
+                <span class="meta-value">
+                    {% if plan.difficulty_level == 'debutant' %}Débutant
+                    {% elif plan.difficulty_level == 'intermediaire' %}Intermédiaire
+                    {% elif plan.difficulty_level == 'avance' %}Avancé
+                    {% else %}{{ plan.difficulty_level }}{% endif %}
+                </span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-icon"><i class="fas fa-calendar-check"></i></span>
+                <span class="meta-label">Créé le:</span>
+                <span class="meta-value">{{ plan.created_at.strftime('%d/%m/%Y') }}</span>
+            </div>
+        </div>
+
+        <div class="plan-description">
+            <h3>Description</h3>
+            <p>{{ plan.description }}</p>
+        </div>
+
+        <div class="plan-content">
+            <h3>Programme détaillé</h3>
+            <div class="formatted-content">
+                {{ plan.plan_content|safe }}
+            </div>
+        </div>
+
+        <div class="plan-actions">
+            <a href="{{ url_for('log_workout', plan_id=plan.id) }}" class="btn btn-primary">
+                <i class="fas fa-check-circle"></i> Enregistrer une séance
+            </a>
+            <a href="{{ url_for('chat') }}?prompt=Explique-moi plus de détails sur ce programme d'entraînement" class="btn btn-secondary">
+                <i class="fas fa-question-circle"></i> Poser des questions
+            </a>
+            <a href="#" onclick="window.print();" class="btn btn-outline">
+                <i class="fas fa-print"></i> Imprimer
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="new-plan-form">
+        <form method="POST" action="{{ url_for('create_workout_plan') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="form-group">
+                <label for="title">Titre du programme</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="objective">Objectif principal</label>
+                    <select id="objective" name="objective" required>
+                        <option value="">Sélectionnez un objectif</option>
+                        <option value="perte_de_poids">Perte de poids</option>
+                        <option value="prise_de_muscle">Prise de muscle</option>
+                        <option value="endurance">Amélioration de l'endurance</option>
+                        <option value="force">Développement de la force</option>
+                        <option value="sante">Santé générale</option>
+                        <option value="mobilite">Amélioration de la mobilité</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="difficulty_level">Niveau de difficulté</label>
+                    <select id="difficulty_level" name="difficulty_level" required>
+                        <option value="">Sélectionnez un niveau</option>
+                        <option value="debutant">Débutant</option>
+                        <option value="intermediaire">Intermédiaire</option>
+                        <option value="avance">Avancé</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="days_per_week">Jours par semaine</label>
+                    <select id="days_per_week" name="days_per_week" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="1">1 jour</option>
+                        <option value="2">2 jours</option>
+                        <option value="3">3 jours</option>
+                        <option value="4">4 jours</option>
+                        <option value="5">5 jours</option>
+                        <option value="6">6 jours</option>
+                        <option value="7">7 jours</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration_minutes">Durée (minutes)</label>
+                    <input type="number" id="duration_minutes" name="duration_minutes" min="15" max="180" step="5" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="equipment">Équipement disponible</label>
+                <select id="equipment" name="equipment" required>
+                    <option value="">Sélectionnez</option>
+                    <option value="aucun">Aucun équipement (poids du corps uniquement)</option>
+                    <option value="leger">Équipement léger à domicile (haltères, bandes élastiques)</option>
+                    <option value="maison">Salle à domicile (haltères, banc, barre)</option>
+                    <option value="salle">Accès à une salle de sport complète</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="limitations">Limitations physiques ou blessures</label>
+                <textarea id="limitations" name="limitations" rows="3"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-dumbbell"></i> Générer mon programme
+                </button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

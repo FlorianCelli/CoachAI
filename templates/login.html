@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}FitCoach IA - Connexion{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>Connexion</h1>
+            <p>Accédez à votre compte FitCoach IA</p>
+        </div>
+        
+        <div class="auth-form">
+            <form method="POST" action="{{ url_for('login') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox">
+                        <input type="checkbox" id="remember_me" name="remember_me">
+                        <label for="remember_me">Se souvenir de moi</label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="auth-footer">
+            <p>Vous n'avez pas de compte? <a href="{{ url_for('register') }}">Inscrivez-vous</a></p>
+            <!-- Suppression de la référence à reset_password_request -->
+        </div>
+    </div>
+</div>
+{% endblock %}

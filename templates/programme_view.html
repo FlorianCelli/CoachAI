@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}{{ program.title }}{% endblock %}
+
+{% block content %}
+<div class="program-view-container">
+    <div class="program-header">
+        <h1>{{ program.title }}</h1>
+        <div class="program-actions">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Retour</a>
+            <button class="btn btn-outline-primary" onclick="window.print()">
+                <i class="fas fa-print"></i> Imprimer
+            </button>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProgramModal">
+                <i class="fas fa-trash"></i> Supprimer
+            </button>
+        </div>
+    </div>
+    
+    <div class="program-details">
+        <p><strong>Objectif:</strong> {{ program.fitness_goal }}</p>
+        <p><strong>Niveau:</strong> {{ program.fitness_level }}</p>
+        <p><strong>Jours par semaine:</strong> {{ program.days_per_week }}</p>
+        {% if program.equipment %}
+        <p><strong>Équipement:</strong> {{ program.equipment }}</p>
+        {% endif %}
+        <p><strong>Créé le:</strong> {{ program.created_at|format_datetime }}</p>
+    </div>
+    
+    <div class="program-content">
+        {% if program.formatted_content %}
+            {{ program.formatted_content|safe }}
+        {% else %}
+            <div class="program-plain-content">
+                {{ program.content|nl2br }}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal de confirmation de suppression -->
+<div class="modal fade" id="deleteProgramModal" tabindex="-1" aria-labelledby="deleteProgramModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProgramModalLabel">Confirmer la suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer ce programme d'entraînement ? Cette action est irréversible.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-program">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .program-view-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .program-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .program-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #3498db;
+    }
+    
+    .program-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .program-details {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+    }
+    
+    .program-details p {
+        margin: 5px 0;
+    }
+    
+    .program-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .program-plain-content {
+        white-space: pre-line;
+        line-height: 1.6;
+    }
+    
+    /* Pour assurer la compatibilité avec les styles injectés par le ContentFormatter */
+    .program-container {
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+    
+    /* Styles d'impression */
+    @media print {
+        .program-actions, .navbar, footer {
+            display: none !important;
+        }
+        
+        .program-view-container {
+            padding: 0;
+            max-width: 100%;
+        }
+        
+        .program-content {
+            box-shadow: none;
+            padding: 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Gérer la suppression du programme
+        document.getElementById('confirm-delete-program').addEventListener('click', function() {
+            fetch(`/api/programme/{{ program.id }}/delete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau ou serveur');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "{{ url_for('dashboard') }}";
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la suppression du programme. Veuillez réessayer.');
+            });
+        });
+    });
+</script>
+{% endblock %}

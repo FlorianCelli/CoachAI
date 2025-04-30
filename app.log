@@ -1,0 +1,621 @@
+nohup: ignoring input
+ * Serving Flask app 'app'
+ * Debug mode: on
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.44.26:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+ * Debugger is active!
+ * Debugger PIN: 493-952-303
+90.29.126.232 - - [25/Apr/2025 15:31:25] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:25] "GET /static/css/main.css HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:26] "GET /static/js/main.js HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:26] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+90.29.126.232 - - [25/Apr/2025 15:31:30] "GET /login HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:30] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:30] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:38] "[32mPOST /login HTTP/1.1[0m" 302 -
+/home/ec2-user/myAIcoach/app.py:39: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  return User.query.get(int(user_id))
+90.29.126.232 - - [25/Apr/2025 15:31:38] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:38] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:38] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:39] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:44] "GET /chat HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:44] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:44] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:44] "GET /static/css/chat.css HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:44] "GET /static/js/chat.js HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:49] "GET /chat?conversation_id=&csrf_token=IjAzYTIzYzQ1MWMxZmE2MDEyMzVmODg1MWUzY2RhNjc4ZWIyNDNiYTAi.aAuq4A.UZFKRl1V3-ix9WmgYtGMxZwy_7E HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:49] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:49] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:49] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:49] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:54] "GET /chat?conversation_id=&csrf_token=IjAzYTIzYzQ1MWMxZmE2MDEyMzVmODg1MWUzY2RhNjc4ZWIyNDNiYTAi.aAuq5Q.0VXFUbtL0YIw1ImMbneiZwjZi_Y HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:54] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:54] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:54] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:56] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:56] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:56] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:56] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:31:57] "[35m[1mGET /nutrition-plans HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2552, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2532, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/ec2-user/myAIcoach/app.py", line 615, in nutrition_plans
+    return render_template('nutrition_plans.html', plans=plans)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/ec2-user/myAIcoach/templates/nutrition_plans.html", line 535, in template
+    {% block title %}FitCoach IA - Plans nutritionnels{% endblock %}
+jinja2.exceptions.TemplateAssertionError: block 'title' defined twice
+90.29.126.232 - - [25/Apr/2025 15:31:58] "GET /nutrition-plans?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:58] "GET /nutrition-plans?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:31:58] "GET /nutrition-plans?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:00] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:01] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:01] "GET /static/css/plans.css HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:05] "GET /workout-plan/1 HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:06] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:06] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:08] "GET /workout-plan/1 HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:08] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:11] "[35m[1mGET /workout-plan/edit/1 HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2552, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2532, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/ec2-user/myAIcoach/app.py", line 567, in edit_workout_plan
+    return render_template('edit_workout_plan.html', plan=plan)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/templating.py", line 62, in get_source
+    return self._get_source_fast(environment, template)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/templating.py", line 98, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: edit_workout_plan.html
+90.29.126.232 - - [25/Apr/2025 15:32:11] "GET /workout-plan/edit/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:11] "GET /workout-plan/edit/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:12] "GET /workout-plan/edit/1?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:14] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:14] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:14] "[36mGET /static/css/plans.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:15] "GET /workout-plan/new HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:32:15] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:32:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [25/Apr/2025 15:37:48] "[35m[1mPOST /workout-plan/create HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib64/python3.7/http/client.py", line 1373, in getresponse
+    response.begin()
+  File "/usr/lib64/python3.7/http/client.py", line 319, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib64/python3.7/http/client.py", line 280, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib64/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib64/python3.7/ssl.py", line 1104, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib64/python3.7/ssl.py", line 962, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/httpsession.py", line 473, in send
+    chunked=self._chunked(request.headers),
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 803, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/util/retry.py", line 527, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 723, in urlopen
+    chunked=chunked,
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 470, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 359, in _raise_timeout
+    self, url, "Read timed out. (read timeout=%s)" % timeout_value
+urllib3.exceptions.ReadTimeoutError: AWSHTTPSConnectionPool(host='bedrock-runtime.us-east-1.amazonaws.com', port=443): Read timed out. (read timeout=60)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2552, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2532, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/ec2-user/myAIcoach/app.py", line 530, in create_workout_plan
+    plan_content = bedrock_client.invoke_model(prompt, system_prompt=customized_system_prompt)
+  File "/home/ec2-user/myAIcoach/utils/bedrock_client.py", line 27, in invoke_model
+    body=json.dumps(request_body)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/client.py", line 553, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/client.py", line 990, in _make_api_call
+    operation_model, request_dict, request_context
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/client.py", line 1015, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/endpoint.py", line 207, in _send_request
+    exception,
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/endpoint.py", line 361, in _needs_retry
+    request_dict=request_dict,
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/retryhandler.py", line 207, in __call__
+    if self._checker(**checker_kwargs):
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/retryhandler.py", line 285, in __call__
+    attempt_number, response, caught_exception
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/retryhandler.py", line 320, in _should_retry
+    return self._checker(attempt_number, response, caught_exception)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/retryhandler.py", line 364, in __call__
+    attempt_number, response, caught_exception
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/retryhandler.py", line 248, in __call__
+    attempt_number, caught_exception
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/retryhandler.py", line 416, in _check_caught_exception
+    raise caught_exception
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/endpoint.py", line 281, in _do_get_response
+    http_response = self._send(request)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/endpoint.py", line 377, in _send
+    return self.http_session.send(request)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/httpsession.py", line 501, in send
+    raise ReadTimeoutError(endpoint_url=request.url, error=e)
+botocore.exceptions.ReadTimeoutError: Read timeout on endpoint URL: "https://bedrock-runtime.us-east-1.amazonaws.com/model/us.anthropic.claude-3-7-sonnet-20250219-v1%3A0/invoke"
+90.29.126.232 - - [25/Apr/2025 15:37:48] "GET /workout-plan/create?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:37:48] "GET /workout-plan/create?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 15:37:48] "GET /workout-plan/create?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+90.29.126.232 - - [25/Apr/2025 17:10:53] "GET / HTTP/1.1" 200 -
+99.29.91.193 - - [25/Apr/2025 17:53:19] "GET / HTTP/1.0" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:48] "GET / HTTP/1.1" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:49] "GET /static/css/main.css HTTP/1.1" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:49] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:49] "GET /static/js/main.js HTTP/1.1" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:49] "GET / HTTP/1.1" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:50] "GET /static/js/main.js HTTP/1.1" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:50] "GET /static/css/main.css HTTP/1.1" 200 -
+54.241.199.23 - - [25/Apr/2025 20:46:50] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+205.210.31.50 - - [25/Apr/2025 22:18:14] "GET / HTTP/1.0" 200 -
+139.99.35.37 - - [25/Apr/2025 23:02:35] code 400, message Bad request version ('À#À¬À®À+À')
+139.99.35.37 - - [25/Apr/2025 23:02:35] "[35m[1m§ £ºËá~-S&á®¼6â;Xýáèü"³1¦ObõÏ ø"¿¢	¹Ó*<1îÞ¯c0 ¦ï?+-£;,   3 gÀÀ¢  9 kÀÀ£  E ¾  Ä ÀÀ	À#À¬À®À+À[0m" HTTPStatus.BAD_REQUEST -
+139.99.35.46 - - [25/Apr/2025 23:02:40] "GET / HTTP/1.1" 200 -
+104.234.115.32 - - [26/Apr/2025 00:20:30] code 400, message Bad request version ('À\x14À')
+104.234.115.32 - - [26/Apr/2025 00:20:30] "[35m[1m î  ê¸µ>¹¨È-Clr¨áaÑ§f»c|Ñ?,¡ @éhGr-nb¥oMË;\|;ÿi§í± &Ì¨Ì©À/À0À+À,ÀÀ	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+104.234.115.32 - - [26/Apr/2025 00:21:02] "GET / HTTP/1.1" 200 -
+104.234.115.32 - - [26/Apr/2025 00:23:07] code 400, message Bad request version ('À\x14À')
+104.234.115.32 - - [26/Apr/2025 00:23:07] "[35m[1m ú  ö÷Zóî°c«^&_FÇS©´\G©¿ñ?F²¡ À­ ÄÞËHh3Ùè{Gl½PdÚ 2À/À+ÀÀÀÀ	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+104.234.115.32 - - [26/Apr/2025 00:23:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+52.26.211.46 - - [26/Apr/2025 02:47:56] "GET / HTTP/1.1" 200 -
+52.26.211.46 - - [26/Apr/2025 02:47:56] "GET /static/js/main.js HTTP/1.1" 200 -
+52.26.211.46 - - [26/Apr/2025 02:47:56] "GET /static/css/main.css HTTP/1.1" 200 -
+52.26.211.46 - - [26/Apr/2025 02:47:56] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+52.26.211.46 - - [26/Apr/2025 02:47:57] "GET / HTTP/1.1" 200 -
+52.26.211.46 - - [26/Apr/2025 02:47:57] "GET /static/js/main.js HTTP/1.1" 200 -
+52.26.211.46 - - [26/Apr/2025 02:47:57] "GET /static/css/main.css HTTP/1.1" 200 -
+52.26.211.46 - - [26/Apr/2025 02:47:57] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+15.235.189.158 - - [26/Apr/2025 03:20:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+64.62.156.71 - - [26/Apr/2025 05:13:52] "GET / HTTP/1.1" 200 -
+64.62.156.71 - - [26/Apr/2025 05:14:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+159.65.153.139 - - [26/Apr/2025 06:25:39] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+159.65.153.139 - - [26/Apr/2025 06:25:39] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+159.65.153.139 - - [26/Apr/2025 06:25:39] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+159.65.153.139 - - [26/Apr/2025 06:25:39] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+159.65.153.139 - - [26/Apr/2025 06:25:39] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+3.135.43.12 - - [26/Apr/2025 08:48:48] "GET / HTTP/1.1" 200 -
+3.135.43.12 - - [26/Apr/2025 08:48:48] "GET /static/css/main.css HTTP/1.1" 200 -
+3.135.43.12 - - [26/Apr/2025 08:48:48] "GET /static/js/main.js HTTP/1.1" 200 -
+3.135.43.12 - - [26/Apr/2025 08:48:48] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+3.135.43.12 - - [26/Apr/2025 08:48:49] "GET / HTTP/1.1" 200 -
+3.135.43.12 - - [26/Apr/2025 08:48:49] "GET /static/js/main.js HTTP/1.1" 200 -
+3.135.43.12 - - [26/Apr/2025 08:48:49] "GET /static/css/main.css HTTP/1.1" 200 -
+3.135.43.12 - - [26/Apr/2025 08:48:49] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+3.149.253.213 - - [26/Apr/2025 09:28:09] "GET / HTTP/1.1" 200 -
+3.149.253.213 - - [26/Apr/2025 09:32:20] "GET / HTTP/1.1" 200 -
+3.149.253.213 - - [26/Apr/2025 09:33:12] code 400, message Bad request version ('À\x14À')
+3.149.253.213 - - [26/Apr/2025 09:33:12] "[35m[1m {  wùÅ¬ÓZ@,ª"ªNjóQØê	ÄÊQOJ«ÌðÈmò  À/À+ÀÀÀÀ	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+3.149.253.213 - - [26/Apr/2025 09:38:01] code 400, message Bad HTTP/0.9 request type ("\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x96'ÔPðWÍ;\x16ÇÌ\x0fPDK4éWO±Þ§MÛð\x16Æzr*ä£\x00\x00\x1aÀ/À+À\x11À\x07À\x13À")
+3.149.253.213 - - [26/Apr/2025 09:38:01] "[35m[1m {  w'ÔPðWÍ;ÇÌPDK4éWO±Þ§MÛðÆzr*ä£  À/À+ÀÀÀÀ	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "GET / HTTP/1.0" 200 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mPOST /sdk HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /nmaplowercheck1745666125 HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "GET / HTTP/1.0" 200 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /HNAP1 HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /evox/about HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "GET / HTTP/1.0" 200 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "GET / HTTP/1.1" 200 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "GET / HTTP/1.1" 200 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /webhdfs/v1/?op=LISTSTATUS HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /api HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /api/json HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /config HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /explorer/index.html HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /ws/v1/cluster HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /_all_dbs HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /com.amazon.coral.metadata/model.json HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "GET /login HTTP/1.1" 200 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /info HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /version HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /conf HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /grid/console HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /api/v1/trace HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /status HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /models HTTP/1.1[0m" 404 -
+44.211.11.245 - - [26/Apr/2025 11:15:25] "[33mGET /graph HTTP/1.1[0m" 404 -
+35.166.8.146 - - [26/Apr/2025 11:15:27] code 400, message Bad request version ("êQ\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ")
+35.166.8.146 - - [26/Apr/2025 11:15:27] "[35m[1m  üïsÔhjL_®bÒdKa!þ=ûuvâ1KY (°ôÐXÀsY¬«Ô[Ê¤0I9ù¸yÚÀ6Þ	êQ >À,À0 Ì©Ì¨ÌªÀ+À/ À$À( kÀ#À' gÀ[0m" HTTPStatus.BAD_REQUEST -
+35.166.8.146 - - [26/Apr/2025 11:15:27] "GET / HTTP/1.1" 200 -
+35.166.8.146 - - [26/Apr/2025 11:15:27] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:16] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:16] "GET /static/css/main.css HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:16] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:16] "GET /static/js/main.js HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:17] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:17] "GET /static/css/main.css HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:17] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:17] "GET /static/js/main.js HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:25] "[33mGET /v2 HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:25] "[33mGET /manifest.json HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:25] "[33mGET /_cluster/settings?include_defaults=true HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:25] "[33mGET /api/checkHealth HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:25] "[33mGET /gremlin/status HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:26] "[33mGET /api/organization/preAuthData HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:26] "[33mGET /_xpack/usage HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:26] "[33mGET /css/emailswitch.css HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:27] "[33mGET /_stats/indices HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:27] "[33mGET /search HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:27] "[33mGET /_cluster/stats HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:27] "[33mGET /console/login/LoginForm.jsp HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:27] "[33mGET /added_random_path_for_security_testing HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:32] "[33mPOST /webui/logoutconfirm.html?menu=1 HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:35] "[33mPOST /webui/logoutconfirm.html?logon_hash=1 HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 11:17:40] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:40] "GET /static/css/main.css HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:40] "GET /static/js/main.js HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 11:17:40] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+170.62.100.241 - - [26/Apr/2025 13:35:48] "GET / HTTP/1.1" 200 -
+170.62.100.241 - - [26/Apr/2025 13:35:49] code 400, message Bad request version ('À\x13À')
+170.62.100.241 - - [26/Apr/2025 13:35:49] "[35m[1m ä  àë3Í³?ÑùÞ!ò	"A­ ¯?>v#uÃ ¢Yë¨u¶³á&fÁÖóe£S#-}¹ïmä À+À/À,À0Ì©Ì¨À	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+44.227.162.69 - - [26/Apr/2025 14:49:48] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 14:49:48] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 14:49:48] "GET /static/css/main.css HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 14:49:48] "GET /static/js/main.js HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 14:49:49] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 14:49:49] "GET /static/js/main.js HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 14:49:49] "GET /static/css/main.css HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 14:49:49] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+47.236.160.125 - - [26/Apr/2025 16:56:18] "GET / HTTP/1.1" 200 -
+47.236.160.125 - - [26/Apr/2025 16:56:19] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+47.236.160.125 - - [26/Apr/2025 16:56:43] code 400, message Bad request syntax ('{\x01\x00\x1613911391139À¨\x01\x01\x13\x90{')
+47.236.160.125 - - [26/Apr/2025 16:56:43] "[35m[1m{ 13911391139À¨{[0m" HTTPStatus.BAD_REQUEST -
+18.97.5.50 - - [26/Apr/2025 18:59:35] code 400, message Bad request version ("0ç\x89þgÌ\x15ÁôjÜÈüyðÞ7®\x05\x9eáO\x00V\x13\x02\x13\x03\x13\x01À,À0À+À/Ì©Ì¨\x00\x9f\x00\x9eÌªÀ¯À\xadÀ®À¬À$À(À#À'À")
+18.97.5.50 - - [26/Apr/2025 18:59:35] "[35m[1m  ü )½Ój dº3éaæÆëv==¹>¢ 6x,^J×Z0çþgÌÁôjÜÈüyðÞ7®áO VÀ,À0À+À/Ì©Ì¨  ÌªÀ¯À­À®À¬À$À(À#À'À[0m" HTTPStatus.BAD_REQUEST -
+18.97.5.50 - - [26/Apr/2025 18:59:35] "GET / HTTP/1.1" 200 -
+20.163.5.243 - - [26/Apr/2025 19:53:52] "[33mGET /v2/ HTTP/1.1[0m" 404 -
+44.227.162.69 - - [26/Apr/2025 20:50:29] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 20:50:29] "GET /static/css/main.css HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 20:50:29] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 20:50:29] "GET /static/js/main.js HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 20:50:30] "GET / HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 20:50:30] "GET /static/js/main.js HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 20:50:30] "GET /static/css/main.css HTTP/1.1" 200 -
+44.227.162.69 - - [26/Apr/2025 20:50:30] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+104.234.115.204 - - [26/Apr/2025 22:24:16] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03HÙ~\x16\x81_õ6c\x07\x9cÐIÉÈ\x9bµÞ`\x8eMo\x05\x81m)þÏ4`h°')
+104.234.115.204 - - [26/Apr/2025 22:24:16] "[35m[1m î  êHÙ~_õ6cÐIÉÈµÞ`Mom)þÏ4`h° ËÅUÊ;Ö_´øã{njDrD[0m" HTTPStatus.BAD_REQUEST -
+104.234.115.204 - - [26/Apr/2025 22:24:50] "GET / HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:22] "GET / HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:22] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:22] "GET /static/css/main.css HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:22] "GET /static/js/main.js HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:23] "GET / HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:24] "GET /static/js/main.js HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:24] "GET /static/css/main.css HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 02:51:24] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "GET / HTTP/1.0" 200 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "[33mGET /nmaplowercheck1745731793 HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "[33mPOST /sdk HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "GET / HTTP/1.0" 200 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "[33mGET /HNAP1 HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "[33mGET /evox/about HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "GET / HTTP/1.0" 200 -
+54.225.70.151 - - [27/Apr/2025 05:29:53] "GET / HTTP/1.1" 200 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "GET / HTTP/1.1" 200 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /webhdfs/v1/?op=LISTSTATUS HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /api HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /api/json HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /config HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /com.amazon.coral.metadata/model.json HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /ws/v1/cluster HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /explorer/index.html HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /_all_dbs HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "GET /login HTTP/1.1" 200 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /version HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /info HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /conf HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /grid/console HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /api/v1/trace HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /status HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /graph HTTP/1.1[0m" 404 -
+54.225.70.151 - - [27/Apr/2025 05:29:54] "[33mGET /models HTTP/1.1[0m" 404 -
+34.208.134.192 - - [27/Apr/2025 05:29:56] code 400, message Bad request version ("¸K.\x92°Ýb\x92j\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ")
+34.208.134.192 - - [27/Apr/2025 05:29:56] "[35m[1m  üS~|	ªú@[ÿONë¡R°ÆÊ±\ûÍp 2b.å;Äüã{êC_Þ5[~ù¥{¥¸K.°Ýbj >À,À0 Ì©Ì¨ÌªÀ+À/ À$À( kÀ#À' gÀ[0m" HTTPStatus.BAD_REQUEST -
+34.208.134.192 - - [27/Apr/2025 05:29:56] "GET / HTTP/1.1" 200 -
+35.166.8.146 - - [27/Apr/2025 05:29:56] "GET / HTTP/1.1" 200 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "GET / HTTP/1.0" 200 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /nmaplowercheck1745731844 HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mPOST /sdk HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "GET / HTTP/1.0" 200 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /evox/about HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /HNAP1 HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "GET / HTTP/1.0" 200 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "GET / HTTP/1.1" 200 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "GET / HTTP/1.1" 200 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /webhdfs/v1/?op=LISTSTATUS HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /api HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /api/json HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /explorer/index.html HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /config HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /com.amazon.coral.metadata/model.json HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /ws/v1/cluster HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /_all_dbs HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "GET /login HTTP/1.1" 200 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /version HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /info HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /conf HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /api/v1/trace HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /grid/console HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /status HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /graph HTTP/1.1[0m" 404 -
+54.242.170.70 - - [27/Apr/2025 05:30:44] "[33mGET /models HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:35] "GET / HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:35] "GET /static/css/main.css HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:35] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:35] "GET /static/js/main.js HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:36] "GET / HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:36] "GET /static/js/main.js HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:36] "GET /static/css/main.css HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:36] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:31:43] "[33mGET /console/login/LoginForm.jsp HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:44] "[33mGET /_stats/indices HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:44] "[33mGET /api/organization/preAuthData HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:44] "[33mGET /api/checkHealth HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:45] "[33mGET /_cluster/stats HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:45] "[33mGET /v2 HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:45] "[33mGET /_xpack/usage HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:45] "[33mGET /added_random_path_for_security_testing HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:46] "[33mGET /_cluster/settings?include_defaults=true HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:46] "[33mGET /gremlin/status HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:46] "[33mGET /css/emailswitch.css HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:47] "[33mGET /manifest.json HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:47] "[33mGET /search HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:52] "[33mPOST /webui/logoutconfirm.html?menu=1 HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:55] "[33mPOST /webui/logoutconfirm.html?logon_hash=1 HTTP/1.1[0m" 404 -
+54.241.199.23 - - [27/Apr/2025 05:31:59] "GET / HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:32:00] "GET /static/css/main.css HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:32:00] "GET /static/js/main.js HTTP/1.1" 200 -
+54.241.199.23 - - [27/Apr/2025 05:32:00] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+64.225.59.157 - - [27/Apr/2025 07:59:28] code 400, message Bad request version ('À\x14À')
+64.225.59.157 - - [27/Apr/2025 07:59:28] "[35m[1m {  w©Tc$trW^Î¯N_àßM^d·A#{ÿ_b=k  À/À+ÀÀÀÀ	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+64.225.59.157 - - [27/Apr/2025 07:59:28] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03ýê\x87Bÿ&ÿ\x1aÌ\x18\x17¼²§')
+64.225.59.157 - - [27/Apr/2025 07:59:28] "[35m[1m {  wýêBÿ&ÿÌ¼²§ Z[0m" HTTPStatus.BAD_REQUEST -
+64.225.59.157 - - [27/Apr/2025 07:59:28] "GET / HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:14] "GET / HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:14] "GET /static/js/main.js HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:14] "GET /static/css/main.css HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:14] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:15] "GET / HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:15] "GET /static/js/main.js HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:15] "GET /static/css/main.css HTTP/1.1" 200 -
+18.216.197.218 - - [27/Apr/2025 08:52:15] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+13.59.65.15 - - [27/Apr/2025 12:01:29] "GET / HTTP/1.1" 200 -
+13.59.65.15 - - [27/Apr/2025 12:04:28] code 400, message Bad request version ('À\x14À')
+13.59.65.15 - - [27/Apr/2025 12:04:28] "[35m[1m {  wËÚÃ8yH¾âMkÈT²½Ú¡õû½G7BJ   À/À+ÀÀÀÀ	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+13.59.65.15 - - [27/Apr/2025 12:06:21] code 400, message Bad request syntax ('SSH-2.0-Go')
+13.59.65.15 - - [27/Apr/2025 12:06:21] "[35m[1mSSH-2.0-Go[0m" HTTPStatus.BAD_REQUEST -
+13.59.65.15 - - [27/Apr/2025 12:08:52] code 400, message Bad request syntax ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03Ñs8Cô')
+13.59.65.15 - - [27/Apr/2025 12:08:52] "[35m[1m {  wÑs8Cô[0m" HTTPStatus.BAD_REQUEST -
+161.35.128.131 - - [27/Apr/2025 12:59:05] "GET / HTTP/1.1" 200 -
+161.35.128.131 - - [27/Apr/2025 12:59:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+152.32.156.158 - - [27/Apr/2025 13:47:12] code 400, message Bad request version ('\x00\x9eÌ¨Ìª\x003\x00=\x00\x16À')
+152.32.156.158 - - [27/Apr/2025 13:47:12] "[35m[1m ·|©¢9ô³èÉ¦)×½Ò}yOlû@ë0Ú#Ç÷íÐ¹ Pv8ßôÊò³ò³f1â6`":åþ×¬tøHþ3 4Ì¨Ì©À/À0À+À,À	 Ì¨Ìª 3 = À[0m" HTTPStatus.BAD_REQUEST -
+152.32.156.158 - - [27/Apr/2025 13:47:23] "GET / HTTP/1.1" 200 -
+152.32.156.158 - - [27/Apr/2025 13:47:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+152.32.156.158 - - [27/Apr/2025 13:47:24] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+152.32.156.158 - - [27/Apr/2025 13:47:25] "[33mGET /sitemap.xml HTTP/1.1[0m" 404 -
+152.32.156.158 - - [27/Apr/2025 13:47:25] "GET /static/js/main.js HTTP/1.1" 200 -
+152.32.156.158 - - [27/Apr/2025 13:47:26] "[33mGET /config.json HTTP/1.1[0m" 404 -
+54.68.212.23 - - [27/Apr/2025 14:52:52] "GET / HTTP/1.1" 200 -
+54.68.212.23 - - [27/Apr/2025 14:52:52] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.68.212.23 - - [27/Apr/2025 14:52:52] "GET /static/js/main.js HTTP/1.1" 200 -
+54.68.212.23 - - [27/Apr/2025 14:52:52] "GET /static/css/main.css HTTP/1.1" 200 -
+54.68.212.23 - - [27/Apr/2025 14:52:53] "GET / HTTP/1.1" 200 -
+54.68.212.23 - - [27/Apr/2025 14:52:54] "GET /static/js/main.js HTTP/1.1" 200 -
+54.68.212.23 - - [27/Apr/2025 14:52:54] "GET /static/css/main.css HTTP/1.1" 200 -
+54.68.212.23 - - [27/Apr/2025 14:52:54] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+92.255.57.61 - - [27/Apr/2025 17:35:50] code 400, message Bad request version ("¯nãY»bhlÿ(=':©\x82ÙoÈ¢×\x93\x98´ï\x80å¹\x90\x00(À")
+92.255.57.61 - - [27/Apr/2025 17:35:50] "[35m[1mo kRHÅ#÷:Nßâ´/ÿ	T§Äy°hÆ¤="á ´,¯nãY»bhlÿ(=':©ÙoÈ¢×´ïå¹ (À[0m" HTTPStatus.BAD_REQUEST -
+52.88.73.230 - - [27/Apr/2025 20:54:00] "GET / HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 20:54:00] "GET /static/css/main.css HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 20:54:00] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 20:54:00] "GET /static/js/main.js HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 20:54:01] "GET / HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 20:54:02] "GET /static/js/main.js HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 20:54:02] "GET /static/css/main.css HTTP/1.1" 200 -
+52.88.73.230 - - [27/Apr/2025 20:54:02] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.242.170.70 - - [28/Apr/2025 02:26:29] "GET / HTTP/1.0" 200 -
+54.242.170.70 - - [28/Apr/2025 02:26:29] "[33mGET /nmaplowercheck1745807189 HTTP/1.1[0m" 404 -
+54.242.170.70 - - [28/Apr/2025 02:26:29] "[33mPOST /sdk HTTP/1.1[0m" 404 -
+54.242.170.70 - - [28/Apr/2025 02:26:29] "GET / HTTP/1.0" 200 -
+54.242.170.70 - - [28/Apr/2025 02:26:29] "[33mGET /evox/about HTTP/1.1[0m" 404 -
+54.242.170.70 - - [28/Apr/2025 02:26:29] "[33mGET /HNAP1 HTTP/1.1[0m" 404 -
+54.242.170.70 - - [28/Apr/2025 02:26:29] "GET / HTTP/1.0" 200 -
+54.242.170.70 - - [28/Apr/2025 02:26:30] "GET / HTTP/1.1" 200 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "GET / HTTP/1.1" 200 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /webhdfs/v1/?op=LISTSTATUS HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /api HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /explorer/index.html HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /api/json HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /com.amazon.coral.metadata/model.json HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /_all_dbs HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /config HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /ws/v1/cluster HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "GET /login HTTP/1.1" 200 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /info HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /version HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /conf HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /grid/console HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /api/v1/trace HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /status HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /models HTTP/1.1[0m" 404 -
+44.211.11.245 - - [28/Apr/2025 02:26:30] "[33mGET /graph HTTP/1.1[0m" 404 -
+52.13.113.61 - - [28/Apr/2025 02:26:32] "GET / HTTP/1.1" 200 -
+52.13.113.61 - - [28/Apr/2025 02:26:32] code 400, message Bad request version ("Þ\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ")
+52.13.113.61 - - [28/Apr/2025 02:26:32] "[35m[1m  üIñlî|mqæ×0âqØ6»O².ù«ÎVèA Ê-ÝBM7{tÏ½IdÇ~B Ø×þ£&Ýj*æ	Þ >À,À0 Ì©Ì¨ÌªÀ+À/ À$À( kÀ#À' gÀ[0m" HTTPStatus.BAD_REQUEST -
+34.208.134.192 - - [28/Apr/2025 02:26:32] "GET / HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:31] "GET / HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:31] "GET /static/css/main.css HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:31] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:31] "GET /static/js/main.js HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:32] "GET / HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:32] "GET /static/js/main.js HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:32] "GET /static/css/main.css HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:32] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:40] "[33mGET /api/organization/preAuthData HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:40] "[33mGET /_stats/indices HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:40] "[33mGET /css/emailswitch.css HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:40] "[33mGET /_xpack/usage HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:41] "[33mGET /console/login/LoginForm.jsp HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:41] "[33mGET /_cluster/stats HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:41] "[33mGET /added_random_path_for_security_testing HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:41] "[33mGET /v2 HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:42] "[33mGET /_cluster/settings?include_defaults=true HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:42] "[33mGET /gremlin/status HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:42] "[33mGET /manifest.json HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:42] "[33mGET /search HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:43] "[33mGET /api/checkHealth HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:49] "[33mPOST /webui/logoutconfirm.html?menu=1 HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:52] "[33mPOST /webui/logoutconfirm.html?logon_hash=1 HTTP/1.1[0m" 404 -
+52.26.211.46 - - [28/Apr/2025 02:30:56] "GET / HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:56] "GET /static/css/main.css HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:56] "GET /static/js/main.js HTTP/1.1" 200 -
+52.26.211.46 - - [28/Apr/2025 02:30:56] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:10] "GET / HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:10] "GET /static/css/main.css HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:10] "GET /static/js/main.js HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:10] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:11] "GET / HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:11] "GET /static/js/main.js HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:11] "GET /static/css/main.css HTTP/1.1" 200 -
+54.68.212.23 - - [28/Apr/2025 02:55:11] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET / HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET /static/css/main.css HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET /static/js/main.js HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET / HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET /static/js/main.js HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+18.223.89.144 - - [28/Apr/2025 08:56:17] "GET /static/css/main.css HTTP/1.1" 200 -
+49.142.41.16 - - [28/Apr/2025 12:06:35] "GET / HTTP/1.0" 200 -
+184.105.247.194 - - [28/Apr/2025 13:14:06] "GET / HTTP/1.1" 200 -
+184.105.247.194 - - [28/Apr/2025 13:14:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+18.220.154.78 - - [28/Apr/2025 13:29:28] code 400, message Bad request syntax ('SSH-2.0-Go')
+18.220.154.78 - - [28/Apr/2025 13:29:28] "[35m[1mSSH-2.0-Go[0m" HTTPStatus.BAD_REQUEST -
+18.217.121.216 - - [28/Apr/2025 14:57:25] "GET / HTTP/1.1" 200 -
+18.217.121.216 - - [28/Apr/2025 14:57:25] "GET /static/js/main.js HTTP/1.1" 200 -
+18.217.121.216 - - [28/Apr/2025 14:57:25] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+18.217.121.216 - - [28/Apr/2025 14:57:25] "GET /static/css/main.css HTTP/1.1" 200 -
+18.217.121.216 - - [28/Apr/2025 14:57:26] "GET / HTTP/1.1" 200 -
+18.217.121.216 - - [28/Apr/2025 14:57:26] "GET /static/js/main.js HTTP/1.1" 200 -
+18.217.121.216 - - [28/Apr/2025 14:57:26] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+18.217.121.216 - - [28/Apr/2025 14:57:26] "GET /static/css/main.css HTTP/1.1" 200 -
+ * Detected change in '/home/ec2-user/myAIcoach/utils/fitness_prompts.py', reloading
+ * Restarting with stat
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+ * Debugger is active!
+ * Debugger PIN: 493-952-303
+ * Detected change in '/home/ec2-user/myAIcoach/app.py', reloading
+ * Restarting with stat
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+ * Debugger is active!
+ * Debugger PIN: 493-952-303
+ * Detected change in '/home/ec2-user/myAIcoach/utils/bedrock_client.py', reloading
+ * Restarting with stat
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+ * Debugger is active!
+ * Debugger PIN: 493-952-303

@@ -1,0 +1,602 @@
+/* static/css/chat.css */
+.chat-container {
+  display: flex;
+  height: calc(100vh - 180px);
+  min-height: 500px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.chat-sidebar {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e9ecef;
+  background-color: #f8f9fa;
+}
+
+.sidebar-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.conversation-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.conversation-item {
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.conversation-item:hover {
+  background-color: #e9ecef;
+}
+
+.conversation-item.active {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+.conversation-title {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  word-break: break-word;
+}
+
+.conversation-date {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+}
+
+.conversation-item.active .conversation-date {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.no-conversations {
+  padding: 1rem;
+  text-align: center;
+  color: var(--secondary-color);
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.chat-header h2 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message {
+  max-width: 80%;
+  padding: 1rem;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.message.user {
+  align-self: flex-end;
+  background-color: var(--primary-color);
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  background-color: #f1f1f1;
+  border-bottom-left-radius: 0;
+}
+
+.message-content {
+  margin-bottom: 0.5rem;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  text-align: right;
+  opacity: 0.8;
+}
+
+.chat-input {
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.chat-input form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input textarea {
+  flex: 1;
+  resize: none;
+  height: 60px;
+  padding: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .chat-sidebar {
+    width: 100%;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .chat-main {
+    height: calc(100vh - 380px);
+    min-height: 300px;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+}
+
+/* static/css/plans.css */
+.plans-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.plan-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+}
+
+.plan-card-header {
+  padding: 1.25rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.plan-card-header h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.plan-date {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.plan-card-body {
+  padding: 1.25rem;
+  flex: 1;
+}
+
+.plan-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.plan-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.plan-meta-item i {
+  color: var(--primary-color);
+}
+
+.plan-description {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.plan-card-footer {
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inline-form {
+  display: inline;
+}
+
+.no-plans {
+  text-align: center;
+  padding: 3rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 2rem;
+}
+
+.no-plans p:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+/* static/js/main.js */
+document.addEventListener('DOMContentLoaded', function() {
+  // Mobile menu toggle
+  const burger = document.querySelector('.navbar-burger');
+  const menu = document.querySelector('.navbar-menu');
+  
+  if (burger && menu) {
+    burger.addEventListener('click', function() {
+      menu.classList.toggle('active');
+    });
+  }
+  
+  // Flash messages auto-dismiss
+  const alerts = document.querySelectorAll('.alert');
+  alerts.forEach(alert => {
+    setTimeout(() => {
+      alert.style.opacity = '0';
+      setTimeout(() => {
+        alert.style.display = 'none';
+      }, 500);
+    }, 5000);
+  });
+});
+
+/* static/js/chat.js */
+document.addEventListener('DOMContentLoaded', function() {
+  const chatMessages = document.getElementById('chat-messages');
+  const chatForm = document.getElementById('chat-form');
+  const messageInput = document.getElementById('message-input');
+  const newConversationBtn = document.getElementById('new-conversation-btn');
+  const conversationItems = document.querySelectorAll('.conversation-item');
+  
+  // Scroll to bottom of chat
+  if (chatMessages) {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  // New conversation button
+  if (newConversationBtn) {
+    newConversationBtn.addEventListener('click', function() {
+      fetch('/chat/new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        window.location.href = data.redirect_url;
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  }
+  
+  // Conversation items click
+  if (conversationItems.length > 0) {
+    conversationItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const conversationId = this.getAttribute('data-id');
+        window.location.href = `/chat?conversation_id=${conversationId}`;
+      });
+    });
+  }
+  
+  // Chat form submit
+  if (chatForm) {
+    chatForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const message = messageInput.value.trim();
+      if (!message) return;
+      
+      const conversationId = document.querySelector('input[name="conversation_id"]').value;
+      
+      // Disable form while sending
+      const submitButton = chatForm.querySelector('button[type="submit"]');
+      messageInput.disabled = true;
+      submitButton.disabled = true;
+      
+      // Add loading indicator
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+      
+      // Add user message to UI immediately
+      addMessage(message, 'user', formatTime(new Date()));
+      messageInput.value = '';
+      
+      fetch('/chat/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({
+          message: message,
+          conversation_id: conversationId || null
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // If this is a new conversation, update the URL
+        if (!conversationId && data.conversation_id) {
+          const url = new URL(window.location);
+          url.searchParams.set('conversation_id', data.conversation_id);
+          window.history.pushState({}, '', url);
+          document.querySelector('input[name="conversation_id"]').value = data.conversation_id;
+          
+          // Update page title if needed
+          const headerTitle = document.querySelector('.chat-header h2');
+          if (headerTitle && headerTitle.textContent === 'Nouvelle conversation') {
+            // Refresh the page to update the sidebar
+            window.location.reload();
+          }
+        }
+        
+        // Add assistant message to UI
+        addMessage(data.assistant_message.content, 'assistant', data.assistant_message.time);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        addMessage('Une erreur est survenue. Veuillez réessayer.', 'assistant', formatTime(new Date()));
+      })
+      .finally(() => {
+        // Re-enable form
+        messageInput.disabled = false;
+        submitButton.disabled = false;
+        submitButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        messageInput.focus();
+      });
+    });
+  }
+  
+  // Helper function to add message to chat UI
+  function addMessage(content, role, time) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${role}`;
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.innerHTML = content;
+    
+    const timeDiv = document.createElement('div');
+    timeDiv.className = 'message-time';
+    timeDiv.textContent = time;
+    
+    messageDiv.appendChild(contentDiv);
+    messageDiv.appendChild(timeDiv);
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  // Helper function to format time
+  function formatTime(date) {
+    return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  }
+  
+  // Helper function to get CSRF token
+  function getCsrfToken() {
+    return document.querySelector('input[name="csrf_token"]')?.value || '';
+  }
+  
+  // Make textarea expand/contract based on content
+  if (messageInput) {
+    messageInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
+    
+    // Allow Shift+Enter for newlines, Enter to submit
+    messageInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.dispatchEvent(new Event('submit'));
+      }
+    });
+  }
+});
+
+/* Ajout d'un fichier template pour la liste des programmes d'entraînement */
+
+/* templates/workout_plans.html */
+```html
+{% extends 'base.html' %}
+
+{% block title %}FitCoach IA - Programmes d'entraînement{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/plans.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="plans-container">
+    <div class="page-header">
+        <h1>Vos programmes d'entraînement</h1>
+        <a href="{{ url_for('new_workout_plan') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nouveau programme
+        </a>
+    </div>
+    
+    {% if plans %}
+    <div class="plans-grid">
+        {% for plan in plans %}
+        <div class="plan-card">
+            <div class="plan-card-header">
+                <h3>{{ plan.title }}</h3>
+                <span class="plan-date">{{ plan.created_at.strftime('%d/%m/%Y') }}</span>
+            </div>
+            <div class="plan-card-body">
+                <div class="plan-meta-grid">
+                    <div class="plan-meta-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span>{{ plan.objective }}</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>{{ plan.days_per_week }} jours/sem</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>{{ plan.duration_minutes }} min</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-signal"></i>
+                        <span>{{ plan.difficulty_level }}</span>
+                    </div>
+                </div>
+                
+                <p class="plan-description">{{ plan.description }}</p>
+            </div>
+            <div class="plan-card-footer">
+                <a href="{{ url_for('workout_plan', plan_id=plan.id) }}" class="btn btn-primary btn-sm">Voir le détail</a>
+                <form method="POST" action="{{ url_for('delete_workout_plan', plan_id=plan.id) }}" class="inline-form" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-outline btn-sm">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-plans">
+        <p>Vous n'avez pas encore de programmes d'entraînement.</p>
+        <p>Créez votre premier programme personnalisé dès maintenant!</p>
+        <a href="{{ url_for('new_workout_plan') }}" class="btn btn-primary">
+            <i class="fas fa-dumbbell"></i> Créer mon premier programme
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+```
+
+/* templates/nutrition_plans.html */
+```html
+{% extends 'base.html' %}
+
+{% block title %}FitCoach IA - Plans nutritionnels{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/plans.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="plans-container">
+    <div class="page-header">
+        <h1>Vos plans nutritionnels</h1>
+        <a href="{{ url_for('new_nutrition_plan') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nouveau plan
+        </a>
+    </div>
+    
+    {% if plans %}
+    <div class="plans-grid">
+        {% for plan in plans %}
+        <div class="plan-card">
+            <div class="plan-card-header">
+                <h3>{{ plan.title }}</h3>
+                <span class="plan-date">{{ plan.created_at.strftime('%d/%m/%Y') }}</span>
+            </div>
+            <div class="plan-card-body">
+                <div class="plan-meta-grid">
+                    <div class="plan-meta-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span>{{ plan.objective }}</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-fire"></i>
+                        <span>{{ plan.daily_calories }} kcal</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-drumstick-bite"></i>
+                        <span>{{ plan.protein_percentage }}% protéines</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-bread-slice"></i>
+                        <span>{{ plan.carbs_percentage }}% glucides</span>
+                    </div>
+                </div>
+                
+                <p class="plan-description">{{ plan.description }}</p>
+            </div>
+            <div class="plan-card-footer">
+                <a href="{{ url_for('nutrition_plan', plan_id=plan.id) }}" class="btn btn-primary btn-sm">Voir le détail</a>
+                <form method="POST" action="{{ url_for('delete_nutrition_plan', plan_id=plan.id) }}" class="inline-form" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce plan?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-outline btn-sm">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-plans">
+        <p>Vous n'avez pas encore de plans nutritionnels.</p>
+        <p>Créez votre premier plan personnalisé dès maintenant!</p>
+        <a href="{{ url_for('new_nutrition_plan') }}" class="btn btn-primary">
+            <i class="fas fa-apple-alt"></i> Créer mon premier plan
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

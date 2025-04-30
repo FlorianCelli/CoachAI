@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}FitCoach IA - Discussion avec votre coach{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-sidebar">
+        <div class="sidebar-header">
+            <h3>Conversations</h3>
+            <div class="sidebar-actions">
+                <button id="new-conversation-btn" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i> Nouvelle
+                </button>
+                {% if conversations %}
+                <form action="{{ url_for('delete_all_conversations') }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer toutes vos conversations?');" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash"></i> Supprimer tout
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="conversation-list">
+            {% for conv in conversations %}
+            <div class="conversation-item {% if conversation and conv.id == conversation.id %}active{% endif %}" 
+                 data-id="{{ conv.id }}">
+                <div class="conversation-title">{{ conv.title }}</div>
+                <div class="conversation-date">{{ conv.updated_at.strftime('%d/%m/%Y') }}</div>
+            </div>
+            {% else %}
+            <div class="no-conversations">
+                <p>Aucune conversation. Commencez à discuter avec votre coach!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="chat-main">
+        <div class="chat-header">
+            <h2>{% if conversation %}{{ conversation.title }}{% else %}Nouvelle conversation{% endif %}</h2>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            {% if conversation and conversation.messages.count() > 0 %}
+                {% for message in conversation.messages %}
+                <div class="message {% if message.role == 'assistant' %}assistant{% else %}user{% endif %}">
+                    <div class="message-content">{{ message.content | safe }}</div>
+                    <div class="message-time">{{ message.created_at.strftime('%H:%M') }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="message assistant">
+                    <div class="message-content">
+                        <p>Bonjour! Je suis FitCoach, votre coach sportif personnel. Comment puis-je vous aider aujourd'hui?</p>
+                        <p>Je peux vous créer un programme d'entraînement personnalisé, vous donner des conseils nutritionnels, ou simplement répondre à vos questions sur le fitness.</p>
+                        <p>Pour commencer, pourriez-vous me parler un peu de vos objectifs de fitness?</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="chat-input">
+            <form id="chat-form">
+                <input type="hidden" name="conversation_id" value="{% if conversation %}{{ conversation.id }}{% endif %}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <textarea name="message" id="message-input" placeholder="Écrivez votre message ici..." required></textarea>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}FitCoach IA - Plan nutritionnel{% endblock %}
+
+{% block content %}
+<div class="nutrition-container">
+    <div class="page-header">
+        <h1>{% if plan %}{{ plan.title }}{% else %}Nouveau plan nutritionnel{% endif %}</h1>
+        <div class="header-actions">
+            {% if plan %}
+            <a href="{{ url_for('edit_nutrition_plan', plan_id=plan.id) }}" class="btn btn-secondary">
+                <i class="fas fa-edit"></i> Modifier
+            </a>
+            {% endif %}
+            <a href="{{ url_for('nutrition_plans') }}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Retour aux plans
+            </a>
+        </div>
+    </div>
+    
+    {% if plan %}
+    <div class="plan-details">
+        <div class="plan-meta">
+            <div class="meta-item">
+                <i class="fas fa-bullseye"></i>
+                <span class="meta-label">Objectif:</span>
+                <span class="meta-value">{{ plan.objective }}</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-fire"></i>
+                <span class="meta-label">Calories:</span>
+                <span class="meta-value">{{ plan.daily_calories }} kcal/jour</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-drumstick-bite"></i>
+                <span class="meta-label">Protéines:</span>
+                <span class="meta-value">{{ plan.protein_percentage }}%</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-bread-slice"></i>
+                <span class="meta-label">Glucides:</span>
+                <span class="meta-value">{{ plan.carbs_percentage }}%</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-oil-can"></i>
+                <span class="meta-label">Lipides:</span>
+                <span class="meta-value">{{ plan.fat_percentage }}%</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-calendar-check"></i>
+                <span class="meta-label">Créé le:</span>
+                <span class="meta-value">{{ plan.created_at.strftime('%d/%m/%Y') }}</span>
+            </div>
+        </div>
+        
+        <div class="plan-description">
+            <h3>Description</h3>
+            <p>{{ plan.description }}</p>
+        </div>
+        
+        <div class="plan-content">
+            <h3>Plan nutritionnel détaillé</h3>
+            <div class="markdown-content">
+                {{ plan.plan_content | markdown }}
+            </div>
+        </div>
+        
+        <div class="plan-actions">
+            <a href="{{ url_for('chat') }}?prompt=Explique-moi plus de détails sur ce plan nutritionnel" class="btn btn-secondary">
+                <i class="fas fa-question-circle"></i> Poser des questions
+            </a>
+            <a href="{{ url_for('print_nutrition_plan', plan_id=plan.id) }}" class="btn btn-outline" target="_blank">
+                <i class="fas fa-print"></i> Version imprimable
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="new-plan-form">
+        <form method="POST" action="{{ url_for('create_nutrition_plan') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="form-group">
+                <label for="title">Titre du plan</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="3"></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="objective">Objectif principal</label>
+                    <select id="objective" name="objective" required>
+                        <option value="">Sélectionnez un objectif</option>
+                        <option value="perte_de_poids">Perte de poids</option>
+                        <option value="prise_de_muscle">Prise de muscle</option>
+                        <option value="maintenance">Maintien du poids</option>
+                        <option value="performance">Performance sportive</option>
+                        <option value="sante">Santé générale</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="food_preferences">Préférences alimentaires</label>
+                <textarea id="food_preferences" name="food_preferences" rows="3" placeholder="Aliments préférés, style alimentaire..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="food_restrictions">Restrictions alimentaires</label>
+                <textarea id="food_restrictions" name="food_restrictions" rows="3" placeholder="Allergies, intolérances, régimes spécifiques (végétarien, sans gluten...)"></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-apple-alt"></i> Générer mon plan nutritionnel
+                </button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+
+{% block title %}{{ conversation.title }}{% endblock %}
+
+{% block content %}
+<div class="conversation-container">
+    <div class="conversation-header">
+        <h1>{{ conversation.title }}</h1>
+        <div class="conversation-actions">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Retour</a>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConversationModal">
+                <i class="fas fa-trash"></i> Supprimer
+            </button>
+        </div>
+    </div>
+    
+    <div class="messages-container" id="messages-container">
+        {% for message in conversation.messages %}
+            <div class="message-wrapper {{ 'user-message' if message.role == 'user' else 'assistant-message' }}">
+                <div class="message">
+                    <div class="message-header">
+                        <span class="message-author">{{ 'Vous' if message.role == 'user' else 'FitCoach IA' }}</span>
+                        <span class="message-timestamp">{{ message.timestamp|format_datetime('%H:%M') }}</span>
+                    </div>
+                    <div class="message-content">
+                        {% if message.role == 'user' %}
+                            {{ message.content|nl2br }}
+                        {% else %}
+                            {% if message.formatted_content %}
+                                {{ message.formatted_content|safe }}
+                            {% else %}
+                                {{ message.content|nl2br }}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div id="typing-indicator" class="typing-indicator d-none">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+    </div>
+    
+    <form id="message-form" class="message-form">
+        <div class="input-group">
+            <textarea id="message-input" class="form-control" placeholder="Écrivez votre message ici..." required rows="2"></textarea>
+            <button type="submit" class="btn btn-primary send-button">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Modal de confirmation de suppression -->
+<div class="modal fade" id="deleteConversationModal" tabindex="-1" aria-labelledby="deleteConversationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConversationModalLabel">Confirmer la suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cette conversation ? Cette action est irréversible.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-conversation">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .conversation-container {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 80px);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .conversation-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .conversation-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+    
+    .conversation-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .messages-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 10px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    }
+    
+    .message-wrapper {
+        display: flex;
+        margin-bottom: 15px;
+    }
+    
+    .user-message {
+        justify-content: flex-end;
+    }
+    
+    .message {
+        max-width: 80%;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .user-message .message {
+        background-color: #3498db;
+        color: white;
+    }
+    
+    .assistant-message .message {
+        background-color: white;
+        color: #333;
+    }
+    
+    .message-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9em;
+    }
+    
+    .user-message .message-header {
+        color: rgba(255,255,255,0.8);
+    }
+    
+    .message-author {
+        font-weight: bold;
+    }
+    
+    .message-timestamp {
+        opacity: 0.7;
+    }
+    
+    .message-content {
+        line-height: 1.5;
+    }
+    
+    /* Support pour le défilement dans les grands tableaux */
+    .assistant-message .message-content table {
+        max-width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+    
+    .message-form {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        padding: 15px 0;
+    }
+    
+    .input-group {
+        display: flex;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    #message-input {
+        border: none;
+        padding: 15px;
+        resize: none;
+        border-radius: 25px 0 0 25px;
+    }
+    
+    #message-input:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    
+    .send-button {
+        width: 60px;
+        border-radius: 0 25px 25px 0;
+    }
+    
+    /* Indicateur de frappe */
+    .typing-indicator {
+        display: flex;
+        padding: 15px;
+        margin-bottom: 15px;
+        width: fit-content;
+    }
+    
+    .typing-dot {
+        width: 8px;
+        height: 8px;
+        margin: 0 4px;
+        border-radius: 50%;
+        background-color: #3498db;
+        animation: typing-dot 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dot:nth-child(1) {
+        animation-delay: 0s;
+    }
+    
+    .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    
+    @keyframes typing-dot {
+        0%, 60%, 100% {
+            transform: translateY(0);
+            opacity: 0.5;
+        }
+        20% {
+            transform: translateY(-5px);
+            opacity: 1;
+        }
+    }
+    
+    /* Pour les contenus formatés spécialisés */
+    .conversation-text p {
+        margin: 0 0 12px 0;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messagesContainer = document.getElementById('messages-container');
+        const messageForm = document.getElementById('message-form');
+        const messageInput = document.getElementById('message-input');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const conversationId = {{ conversation.id }};
+        
+        // Faire défiler vers le bas pour voir les messages les plus récents
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        // Auto-resize du textarea
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+        
+        // Gérer l'envoi de nouveaux messages
+        messageForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const messageText = messageInput.value.trim();
+            if (!messageText) return;
+            
+            // Désactiver le formulaire pendant l'envoi
+            const submitButton = messageForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            messageInput.disabled = true;
+            
+            // Ajouter immédiatement le message de l'utilisateur dans l'interface
+            const currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const userMessageHTML = `
+                <div class="message-wrapper user-message">
+                    <div class="message">
+                        <div class="message-header">
+                            <span class="message-author">Vous</span>
+                            <span class="message-timestamp">${currentTime}</span>
+                        </div>
+                        <div class="message-content">
+                            ${messageText.replace(/\n/g, '<br>')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            messagesContainer.insertAdjacentHTML('beforeend', userMessageHTML);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Réinitialiser le formulaire
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            
+            // Afficher l'indicateur de frappe
+            typingIndicator.classList.remove('d-none');
+            
+            // Envoyer le message à l'API
+            fetch(`/api/conversation/${conversationId}/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: messageText }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau ou serveur');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Masquer l'indicateur de frappe
+                typingIndicator.classList.add('d-none');
+                
+                // Ajouter la réponse de l'IA
+                const assistantMessageHTML = `
+                    <div class="message-wrapper assistant-message">
+                        <div class="message">
+                            <div class="message-header">
+                                <span class="message-author">FitCoach IA</span>
+                                <span class="message-timestamp">${data.message.timestamp}</span>
+                            </div>
+                            <div class="message-content">
+                                ${data.message.formatted_content}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                messagesContainer.insertAdjacentHTML('beforeend', assistantMessageHTML);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                // Réactiver le formulaire
+                submitButton.disabled = false;
+                messageInput.disabled = false;
+                messageInput.focus();
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                
+                // Masquer l'indicateur de frappe
+                typingIndicator.classList.add('d-none');
+                
+                // Ajouter un message d'erreur
+                const errorMessageHTML = `
+                    <div class="message-wrapper assistant-message">
+                        <div class="message" style="background-color: #ffdddd;">
+                            <div class="message-header">
+                                <span class="message-author">Système</span>
+                                <span class="message-timestamp">${currentTime}</span>
+                            </div>
+                            <div class="message-content">
+                                Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                messagesContainer.insertAdjacentHTML('beforeend', errorMessageHTML);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                // Réactiver le formulaire
+                submitButton.disabled = false;
+                messageInput.disabled = false;
+                messageInput.focus();
+            });
+        });
+        
+        // Gérer la suppression de la conversation
+        document.getElementById('confirm-delete-conversation').addEventListener('click', function() {
+            fetch(`/api/conversation/${conversationId}/delete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau ou serveur');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "{{ url_for('dashboard') }}";
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la suppression de la conversation. Veuillez réessayer.');
+            });
+        });
+        
+        // Raccourci clavier pour envoyer le message (Ctrl+Enter ou Cmd+Enter)
+        messageInput.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                messageForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    });
+</script>
+{% endblock %}

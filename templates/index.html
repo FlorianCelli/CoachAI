@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}FitCoach IA - Votre coach sportif personnel{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Votre coach sportif personnel alimenté par l'IA</h1>
+        <p>Obtenez des programmes d'entraînement personnalisés, des conseils nutritionnels et un soutien motivationnel adaptés à vos objectifs et besoins.</p>
+        {% if not current_user.is_authenticated %}
+        <div class="cta-buttons">
+            <a href="{{ url_for('register') }}" class="btn btn-primary">Commencer</a>
+            <a href="{{ url_for('login') }}" class="btn btn-secondary">Se connecter</a>
+        </div>
+        {% else %}
+        <div class="cta-buttons">
+            <a href="{{ url_for('chat') }}" class="btn btn-primary">Discuter avec votre coach</a>
+            <a href="{{ url_for('profile') }}" class="btn btn-secondary">Voir votre profil</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="hero-image">
+        <img src="{{ url_for('static', filename='img/fitness-coach.svg') }}" alt="Coach sportif">
+    </div>
+</section>
+
+<section class="features">
+    <h2>Fonctionnalités</h2>
+    <div class="feature-cards">
+        <div class="feature-card">
+            <i class="fas fa-dumbbell"></i>
+            <h3>Programmes personnalisés</h3>
+            <p>Obtenez des programmes d'entraînement adaptés à votre niveau, objectifs et équipement disponible.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-apple-alt"></i>
+            <h3>Plans nutritionnels</h3>
+            <p>Recevez des conseils nutritionnels et des plans de repas adaptés à vos besoins et préférences.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-comments"></i>
+            <h3>Coach conversationnel</h3>
+            <p>Discutez avec votre coach IA pour obtenir des réponses à vos questions et un soutien motivationnel.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Suivi de progression</h3>
+            <p>Suivez vos progrès et recevez des ajustements à votre programme en fonction de vos résultats.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Prêt à transformer votre fitness ?</h2>
+    <p>Commencez votre parcours de remise en forme avec un coach IA personnalisé dès aujourd'hui.</p>
+    {% if not current_user.is_authenticated %}
+    <a href="{{ url_for('register') }}" class="btn btn-primary">Commencer maintenant</a>
+    {% else %}
+    <a href="{{ url_for('chat') }}" class="btn btn-primary">Discuter avec votre coach</a>
+    {% endif %}
+</section>
+{% endblock %}

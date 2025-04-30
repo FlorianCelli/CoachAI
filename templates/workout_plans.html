@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}FitCoach IA - Programmes d'entraînement{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/plans.css') }}">
+{% endblock %}
+{% block content %}
+<div class="plans-container">
+    <div class="page-header">
+        <h1>Vos programmes d'entraînement</h1>
+        <a href="{{ url_for('new_workout_plan') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nouveau programme
+        </a>
+    </div>
+    
+    {% if plans %}
+    <div class="plans-grid">
+        {% for plan in plans %}
+        <div class="plan-card">
+            <div class="plan-card-header">
+                <h3>{{ plan.title }}</h3>
+                <span class="plan-date">{{ plan.created_at.strftime('%d/%m/%Y') }}</span>
+            </div>
+            <div class="plan-card-body">
+                <div class="plan-meta-grid">
+                    <div class="plan-meta-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span>
+                            {% if plan.objective == 'perte_de_poids' %}Perte de poids
+                            {% elif plan.objective == 'prise_de_muscle' %}Prise de muscle
+                            {% elif plan.objective == 'endurance' %}Endurance
+                            {% elif plan.objective == 'force' %}Force
+                            {% elif plan.objective == 'sante' %}Santé
+                            {% elif plan.objective == 'mobilite' %}Mobilité
+                            {% else %}{{ plan.objective }}{% endif %}
+                        </span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>{{ plan.days_per_week }} jours/sem</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>{{ plan.duration_minutes }} min</span>
+                    </div>
+                    <div class="plan-meta-item">
+                        <i class="fas fa-signal"></i>
+                        <span>
+                            {% if plan.difficulty_level == 'debutant' %}Débutant
+                            {% elif plan.difficulty_level == 'intermediaire' %}Intermédiaire
+                            {% elif plan.difficulty_level == 'avance' %}Avancé
+                            {% else %}{{ plan.difficulty_level }}{% endif %}
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="plan-description">{{ plan.description }}</p>
+            </div>
+            <div class="plan-card-footer">
+                <a href="{{ url_for('workout_plan', plan_id=plan.id) }}" class="btn btn-primary btn-sm">Voir le détail</a>
+                <form method="POST" action="{{ url_for('delete_workout_plan', plan_id=plan.id) }}" class="inline-form" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-outline btn-sm">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-plans">
+        <div class="empty-state">
+            <i class="fas fa-dumbbell empty-icon"></i>
+            <h3>Aucun programme d'entraînement</h3>
+            <p>Vous n'avez pas encore de programmes d'entraînement.</p>
+            <p>Créez votre premier programme personnalisé dès maintenant!</p>
+            <a href="{{ url_for('new_workout_plan') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Créer mon premier programme
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

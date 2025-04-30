@@ -1,0 +1,499 @@
+/* Styles de base pour le conteneur de chat */
+.chat-container {
+  display: flex;
+  height: calc(100vh - 60px);
+  background-color: #f8f9fa;
+}
+
+/* Styles pour la barre latérale */
+.chat-sidebar {
+  width: 280px;
+  background-color: #fff;
+  border-right: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.sidebar-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.conversation-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.conversation-item {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.conversation-item:hover {
+  background-color: #f0f4f8;
+}
+
+.conversation-item.active {
+  background-color: #e1f5fe;
+}
+
+.conversation-title {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.conversation-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.no-conversations {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+}
+
+/* Styles pour la zone principale de chat */
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.chat-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #f0f2f5;
+}
+
+.chat-input {
+  padding: 15px;
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+}
+
+.chat-input form {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input textarea {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 15px;
+  resize: none;
+  max-height: 120px;
+  min-height: 24px;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.chat-input button {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-input button:hover {
+  background-color: #2980b9;
+}
+
+.chat-input button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Styles pour les messages */
+.message {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.message.user {
+  align-self: flex-end;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.message.system {
+  align-self: center;
+  align-items: center;
+}
+
+.message-content {
+  padding: 12px 16px;
+  border-radius: 18px;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.user .message-content {
+  background-color: #e1f5fe;
+  color: #01579b;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant .message-content {
+  background-color: #fff;
+  color: #333;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.system .message-content {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  color: #9e9e9e;
+  margin-top: 4px;
+  padding: 0 8px;
+}
+
+/* Animation pour l'apparition des messages */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles pour le boutton et formulaire */
+.btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.btn i {
+  margin-right: 5px;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+/* Styles pour l'indicateur de frappe */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.typing-indicator span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: #3498db;
+  border-radius: 50%;
+  margin: 0 2px;
+  opacity: 0.6;
+  animation: typing-animation 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing-animation {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+/* Styles pour le contenu HTML dans les messages du coach */
+.assistant .message-content {
+  min-width: 200px;
+}
+
+/* Styles pour les titres */
+.assistant .message-content h2, 
+.assistant .message-content h3 {
+  font-size: 1.1em;
+  margin: 12px 0 8px 0;
+  color: #2c3e50;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 4px;
+}
+
+.assistant .message-content h4 {
+  font-size: 1em;
+  margin: 10px 0 6px 0;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Styles pour les listes */
+.assistant .message-content ul,
+.assistant .message-content ol {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.assistant .message-content li {
+  margin-bottom: 4px;
+}
+
+/* Styles pour les tableaux */
+.assistant .message-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.9em;
+  overflow-x: auto;
+  display: block;
+}
+
+.assistant .message-content th {
+  background-color: rgba(52, 152, 219, 0.15);
+  color: #2c3e50;
+  text-align: left;
+  padding: 8px;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.assistant .message-content td {
+  padding: 6px 8px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.assistant .message-content tr:nth-child(even) {
+  background-color: rgba(0,0,0,0.02);
+}
+
+/* Style pour les sections colorées */
+.assistant .message-content h4.echauffement,
+.assistant .message-content .echauffement {
+  border-left: 3px solid #e74c3c;
+  padding-left: 10px;
+  margin: 5px 0;
+}
+
+.assistant .message-content h4.cardio,
+.assistant .message-content .cardio {
+  border-left: 3px solid #3498db;
+  padding-left: 10px;
+  margin: 5px 0;
+}
+
+.assistant .message-content h4.musculation,
+.assistant .message-content .musculation {
+  border-left: 3px solid #2ecc71;
+  padding-left: 10px;
+  margin: 5px 0;
+}
+
+.assistant .message-content h4.recuperation,
+.assistant .message-content .recuperation {
+  border-left: 3px solid #f39c12;
+  padding-left: 10px;
+  margin: 5px 0;
+}
+
+/* Styles pour les badges */
+.assistant .message-content .badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: white;
+  margin-right: 4px;
+}
+
+.assistant .message-content .badge-cardio {
+  background-color: #3498db;
+}
+
+.assistant .message-content .badge-force {
+  background-color: #e74c3c;
+}
+
+.assistant .message-content .badge-mobilite {
+  background-color: #f39c12;
+}
+
+/* Styles pour les paragraphes */
+.assistant .message-content p {
+  margin: 6px 0;
+}
+
+/* Styles pour le code */
+.assistant .message-content pre,
+.assistant .message-content code {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.assistant .message-content pre {
+  padding: 8px;
+  margin: 8px 0;
+}
+
+/* Style pour les liens */
+.assistant .message-content a {
+  color: #2980b9;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.assistant .message-content a:hover {
+  color: #3498db;
+}
+
+/* Styles pour les séparateurs */
+.assistant .message-content hr {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin: 10px 0;
+}
+
+/* Style pour les blocs de citation */
+.assistant .message-content blockquote {
+  border-left: 3px solid #3498db;
+  padding-left: 10px;
+  margin: 8px 0;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .chat-container {
+    flex-direction: column;
+    height: calc(100vh - 60px);
+  }
+  
+  .chat-sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+  
+  .assistant .message-content table {
+    font-size: 0.8em;
+  }
+}
