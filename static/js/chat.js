@@ -88,129 +88,135 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Chat form submit
-if (chatForm) {
+  if (chatForm) {
     chatForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const message = messageInput.value.trim();
-        if (!message && !currentImageData) return;  // Require either message or image
-        
-        const conversationId = document.querySelector('input[name="conversation_id"]')?.value;
-        
-        // Disable form while sending
-        const submitButton = chatForm.querySelector('button[type="submit"]');
-        messageInput.disabled = true;
-        submitButton.disabled = true;
-        imageUploadBtn.disabled = true;
-        
-        // Store current image data for use in request
-        const imageToSend = currentImageData;
-        
-        // Clear image preview immediately to prevent double submission
-        if (imagePreviewContainer) {
-            imagePreviewContainer.classList.add('hidden');
+      e.preventDefault();
+      
+      const message = messageInput.value.trim();
+      if (!message && !currentImageData) return;  // Require either message or image
+      
+      const conversationId = document.querySelector('input[name="conversation_id"]')?.value;
+      
+      // Disable form while sending
+      const submitButton = chatForm.querySelector('button[type="submit"]');
+      messageInput.disabled = true;
+      submitButton.disabled = true;
+      imageUploadBtn.disabled = true;
+      
+      // Store current image data for use in request
+      const imageToSend = currentImageData;
+      
+      // Clear image preview immediately
+      if (imagePreviewContainer) {
+        imagePreviewContainer.classList.add('hidden');
+      }
+      if (imagePreview) {
+        imagePreview.src = '';
+      }
+      
+      // Add loading indicator
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+      
+      // Add user message to UI immediately
+      let messageContent = message;
+      if (imageToSend) {
+        // If there's an image, add it to the message content
+        messageContent = `<div class="user-message-content">
+          <div class="user-image">
+            <img src="${imageToSend}" alt="User uploaded image" class="uploaded-image">
+          </div>
+          ${message ? `<div class="user-text">${message}</div>` : ''}
+        </div>`;
+      }
+      
+      addMessage(messageContent, 'user', formatTime(new Date()));
+      messageInput.value = '';
+      messageInput.style.height = 'auto'; // Reset textarea height
+      
+      // Clear the image data reference to prevent reuse
+      currentImageData = null;
+      
+      // Add typing indicator
+      const typingIndicator = addTypingIndicator();
+      
+      // IMPORTANT: Envoyer la requête AVEC texte ET image en UNE SEULE fois
+      console.log("Envoi d'une requête UNIQUE avec " + 
+                 (message ? "texte" : "pas de texte") + 
+                 " et " + 
+                 (imageToSend ? "image" : "pas d'image"));
+      
+      fetch('/chat/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({
+          message: message,
+          conversation_id: conversationId || null,
+          image_data: imageToSend
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-        if (imagePreview) {
-            imagePreview.src = '';
+        return response.json();
+      })
+      .then(data => {
+        // Remove typing indicator
+        if (typingIndicator) {
+          typingIndicator.remove();
         }
         
-        // Add loading indicator
-        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        
-        // Add user message to UI immediately
-        let messageContent = message;
-        if (imageToSend) {
-            // If there's an image, add it to the message content
-            messageContent = `<div class="user-message-content">
-              <div class="user-image">
-                <img src="${imageToSend}" alt="User uploaded image" class="uploaded-image">
-              </div>
-              ${message ? `<div class="user-text">${message}</div>` : ''}
-            </div>`;
+        // If this is a new conversation, update the URL
+        if (!conversationId && data.conversation_id) {
+          const url = new URL(window.location);
+          url.searchParams.set('conversation_id', data.conversation_id);
+          window.history.pushState({}, '', url);
+          
+          if (document.querySelector('input[name="conversation_id"]')) {
+            document.querySelector('input[name="conversation_id"]').value = data.conversation_id;
+          }
+          
+          // Update page title if needed
+          const headerTitle = document.querySelector('.chat-header h2');
+          if (headerTitle && headerTitle.textContent === 'Nouvelle conversation') {
+            // Refresh the page to update the sidebar
+            window.location.reload();
+            return; // Avoid adding message twice
+          }
         }
         
-        addMessage(messageContent, 'user', formatTime(new Date()));
-        messageInput.value = '';
-        messageInput.style.height = 'auto'; // Reset textarea height
+        // Add assistant message to UI
+        addMessage(data.assistant_message.content, 'assistant', data.assistant_message.time);
+      })
+      .catch(error => {
+        console.error('Error:', error);
         
-        // Clear the image data reference to prevent reuse
-        currentImageData = null;
+        // Remove typing indicator
+        if (typingIndicator) {
+          typingIndicator.remove();
+        }
         
-        // Add typing indicator
-        const typingIndicator = addTypingIndicator();
+        // Add error message with system class
+        addSystemMessage('Une erreur est survenue. Veuillez réessayer.');
+      })
+      .finally(() => {
+        // Re-enable form
+        messageInput.disabled = false;
+        submitButton.disabled = false;
+        imageUploadBtn.disabled = false;
+        submitButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        messageInput.focus();
         
-        fetch('/chat/send', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCsrfToken()
-            },
-            body: JSON.stringify({
-                message: message,
-                conversation_id: conversationId || null,
-                image_data: imageToSend
-            })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Remove typing indicator
-            if (typingIndicator) {
-                typingIndicator.remove();
-            }
-            
-            // If this is a new conversation, update the URL
-            if (!conversationId && data.conversation_id) {
-                const url = new URL(window.location);
-                url.searchParams.set('conversation_id', data.conversation_id);
-                window.history.pushState({}, '', url);
-                
-                if (document.querySelector('input[name="conversation_id"]')) {
-                    document.querySelector('input[name="conversation_id"]').value = data.conversation_id;
-                }
-                
-                // Update page title if needed
-                const headerTitle = document.querySelector('.chat-header h2');
-                if (headerTitle && headerTitle.textContent === 'Nouvelle conversation') {
-                    // Refresh the page to update the sidebar
-                    window.location.reload();
-                    return; // Avoid adding message twice
-                }
-            }
-            
-            // Add assistant message to UI
-            addMessage(data.assistant_message.content, 'assistant', data.assistant_message.time);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            
-            // Remove typing indicator
-            if (typingIndicator) {
-                typingIndicator.remove();
-            }
-            
-            // Add error message with system class
-            addSystemMessage('Une erreur est survenue. Veuillez réessayer.');
-        })
-        .finally(() => {
-            // Re-enable form
-            messageInput.disabled = false;
-            submitButton.disabled = false;
-            imageUploadBtn.disabled = false;
-            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
-            messageInput.focus();
-            
-            // Make sure image input is cleared
-            if (imageInput) {
-                imageInput.value = '';
-            }
-        });
+        // Make sure image input is cleared
+        if (imageInput) {
+          imageInput.value = '';
+        }
+      });
     });
-}
+  }
   
   // Helper function to add message to chat UI
   function addMessage(content, role, time) {
