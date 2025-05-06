@@ -1,0 +1,255 @@
+nohup: ignoring input
+ * Serving Flask app 'app'
+ * Debug mode: on
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.44.26:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+ * Debugger is active!
+ * Debugger PIN: 493-952-303
+/home/ec2-user/myAIcoach/app.py:52: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  return User.query.get(int(user_id))
+90.29.126.232 - - [06/May/2025 16:08:22] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:22] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:22] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:22] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:24] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:24] "GET /static/css/main.css HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:24] "GET /static/img/fitness-coach.svg HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:24] "GET /static/js/main.js HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:24] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+90.29.126.232 - - [06/May/2025 16:08:28] "GET /chat HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:28] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:28] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:28] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:28] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:32] "[32mPOST /delete-all-conversations HTTP/1.1[0m" 302 -
+90.29.126.232 - - [06/May/2025 16:08:32] "GET /chat HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:32] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:32] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:32] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:32] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:44] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:44] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:44] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:44] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:51] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:51] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:51] "[36mGET /static/css/plans.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:57] "[32mPOST /workout-plan/delete/3 HTTP/1.1[0m" 302 -
+90.29.126.232 - - [06/May/2025 16:08:57] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:57] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:57] "[36mGET /static/css/plans.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:59] "GET /workout-plan/new HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:59] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:08:59] "GET /static/css/workout_plan.css HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:08:59] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:18] "[35m[1mPOST /workout-plan/create HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2552, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2532, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/ec2-user/myAIcoach/app.py", line 591, in create_workout_plan
+    plan_content = bedrock_client.invoke_model(prompt, system_prompt=customized_system_prompt)
+  File "/home/ec2-user/myAIcoach/utils/bedrock_client.py", line 81, in invoke_model
+    body=json.dumps(request_body)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/client.py", line 553, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "/home/ec2-user/.local/lib/python3.7/site-packages/botocore/client.py", line 1009, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.AccessDeniedException: An error occurred (AccessDeniedException) when calling the InvokeModel operation: User: arn:aws:iam::303531639871:user/Florian is not authorized to perform: bedrock:InvokeModel on resource: arn:aws:bedrock:us-east-1:303531639871:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0 because no identity-based policy allows the bedrock:InvokeModel action
+90.29.126.232 - - [06/May/2025 16:09:18] "GET /workout-plan/create?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:09:18] "GET /workout-plan/create?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:09:18] "GET /workout-plan/create?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:09:19] "[36mGET /workout-plan/create?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:38] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:09:38] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:38] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:38] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:44] "GET /chat HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:09:44] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:44] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:44] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:44] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:09:47] "[35m[1mPOST /chat/send HTTP/1.1[0m" 500 -
+90.29.126.232 - - [06/May/2025 16:13:08] "POST /chat/send HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:13:08] "GET /chat?conversation_id=7 HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:13:08] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:08] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:08] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:11] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:13:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:11] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:11] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:12] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:13:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:13] "[36mGET /static/css/plans.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:13] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:14] "GET /workout-plan/new HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:13:14] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:14] "[36mGET /static/css/workout_plan.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:13:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:19] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:18:19] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:19] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:19] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:21] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:18:21] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:21] "[36mGET /static/css/plans.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:24] "GET /workout-plan/new HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:18:24] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:24] "[36mGET /static/css/workout_plan.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:24] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:29] "GET /chat HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:18:29] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:29] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:29] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:47] "POST /chat/send HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:18:47] "GET /chat?conversation_id=8 HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:18:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:48] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:48] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:48] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:18:58] "[32mPOST /workout-plan/create HTTP/1.1[0m" 302 -
+90.29.126.232 - - [06/May/2025 16:19:13] "POST /chat/send HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:19:34] "POST /chat/send HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:19:51] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:19:52] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:19:52] "GET /static/css/main.css HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:19:52] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:19:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+90.29.126.232 - - [06/May/2025 16:19:53] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:19:53] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:19:53] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:19:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:19:58] "GET /chat HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:19:58] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:19:58] "GET /static/css/chat.css HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:19:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:19:58] "GET /static/js/chat.js HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:20:00] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:20:01] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:01] "[36mGET /static/css/plans.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:07] "GET /workout-plan/3 HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:20:07] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:07] "[36mGET /static/css/workout_plan.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:07] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:12] "GET /workout-plans HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:20:12] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:12] "[36mGET /static/css/plans.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:12] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:14] "GET /workout-plan/3 HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:20:14] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:15] "[36mGET /static/css/workout_plan.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:29] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:20:29] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:29] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:20:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+31.13.115.5 - - [06/May/2025 16:20:42] "[33mGET /robots.txt HTTP/1.1[0m" 404 -
+31.13.115.6 - - [06/May/2025 16:20:42] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:20:48] code 400, message Bad request version ('Õ\x00*ªª\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À')
+90.29.126.232 - - [06/May/2025 16:20:48] "[35m[1m  üsÿkÚe^[yc 'E¬ÆÁØ´úÕá0ÑÔµÇÌ ¹ÀWÈòiÈ|ÎÆI·?>!ùäÓ Äïs Õ *ªªÀ,À+Ì©À0À/Ì¨À[0m" HTTPStatus.BAD_REQUEST -
+90.29.126.232 - - [06/May/2025 16:20:49] code 400, message Bad request version ('c!N\x8a-Çù\x17¤e\x91?&C\x98\x00,êê\x13\x01\x13\x02\x13\x03À,À+Ì©À0À/Ì¨À')
+90.29.126.232 - - [06/May/2025 16:20:49] "[35m[1m  üQýÃ]=â¼ã¿gè2tµËíBP·iÓ @5·$éçç@³³?Çªãc!N-Çù¤e?&C ,êêÀ,À+Ì©À0À/Ì¨À[0m" HTTPStatus.BAD_REQUEST -
+90.29.126.232 - - [06/May/2025 16:20:49] code 400, message Bad request version ('mþ\x00\x00\x14À')
+90.29.126.232 - - [06/May/2025 16:20:49] "[35m[1m }  y³wÜíM-rÉº©A¤Ú¸ÀãItí mþ  À[0m" HTTPStatus.BAD_REQUEST -
+90.29.126.232 - - [06/May/2025 16:39:13] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:39:13] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:14] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:15] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:39:15] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:15] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:32] "[32mGET /logout HTTP/1.1[0m" 302 -
+90.29.126.232 - - [06/May/2025 16:39:33] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:39:33] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:33] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:37] "GET /login HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:39:37] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:37] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:51] "[32mPOST /login HTTP/1.1[0m" 302 -
+90.29.126.232 - - [06/May/2025 16:39:51] "GET /select_coach HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:39:51] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:51] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:39:51] "[35m[1mGET /static/coachvideos/intro_sofia.mp4 HTTP/1.1[0m" 206 -
+90.29.126.232 - - [06/May/2025 16:39:51] "[35m[1mGET /static/coachvideos/intro_maxence%20(1).mp4 HTTP/1.1[0m" 206 -
+90.29.126.232 - - [06/May/2025 16:39:51] "[35m[1mGET /static/coachvideos/intro_maxence%20(1).mp4 HTTP/1.1[0m" 206 -
+90.29.126.232 - - [06/May/2025 16:39:51] "[35m[1mGET /static/coachvideos/intro_sofia.mp4 HTTP/1.1[0m" 206 -
+90.29.126.232 - - [06/May/2025 16:39:52] "[35m[1mGET /static/coachvideos/intro_maxence%20(1).mp4 HTTP/1.1[0m" 206 -
+90.29.126.232 - - [06/May/2025 16:39:52] "[35m[1mGET /static/coachvideos/intro_sofia.mp4 HTTP/1.1[0m" 206 -
+90.29.126.232 - - [06/May/2025 16:39:56] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+90.29.126.232 - - [06/May/2025 16:39:56] "[35m[1mGET /static/coachvideos/intro_sofia.mp4 HTTP/1.1[0m" 206 -
+90.29.126.232 - - [06/May/2025 16:40:11] "[32mPOST /select_coach HTTP/1.1[0m" 302 -
+90.29.126.232 - - [06/May/2025 16:40:11] "GET /profile HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 16:40:11] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 16:40:11] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+18.191.212.58 - - [06/May/2025 18:05:40] "GET / HTTP/1.1" 200 -
+18.191.212.58 - - [06/May/2025 18:08:07] "GET / HTTP/1.1" 200 -
+18.191.212.58 - - [06/May/2025 18:10:11] code 400, message Bad request version ('À\x14À')
+18.191.212.58 - - [06/May/2025 18:10:11] "[35m[1m {  wÍ ×ýT,J®o×ß2»Yðx@D£Ý äÃ×zä  À/À+ÀÀÀÀ	ÀÀ[0m" HTTPStatus.BAD_REQUEST -
+90.29.126.232 - - [06/May/2025 19:22:47] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 19:22:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:48] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:48] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:50] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 19:22:50] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:50] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:50] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:58] "GET / HTTP/1.1" 200 -
+90.29.126.232 - - [06/May/2025 19:22:58] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+90.29.126.232 - - [06/May/2025 19:22:58] "[36mGET /static/img/fitness-coach.svg HTTP/1.1[0m" 304 -
+ * Detected change in '/home/ec2-user/myAIcoach/app.py', reloading
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+ERREUR invoke_model: An error occurred (AccessDeniedException) when calling the InvokeModel operation: User: arn:aws:iam::303531639871:user/Florian is not authorized to perform: bedrock:InvokeModel on resource: arn:aws:bedrock:us-east-1:303531639871:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0 because no identity-based policy allows the bedrock:InvokeModel action
+MAKING SINGLE API CALL - Text: 'salut', Image: False
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+ERREUR invoke_model: An error occurred (AccessDeniedException) when calling the InvokeModel operation: User: arn:aws:iam::303531639871:user/Florian is not authorized to perform: bedrock:InvokeModel on resource: arn:aws:bedrock:us-east-1:303531639871:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0 because no identity-based policy allows the bedrock:InvokeModel action
+Error getting response from AI: An error occurred (AccessDeniedException) when calling the InvokeModel operation: User: arn:aws:iam::303531639871:user/Florian is not authorized to perform: bedrock:InvokeModel on resource: arn:aws:bedrock:us-east-1:303531639871:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0 because no identity-based policy allows the bedrock:InvokeModel action
+MAKING SINGLE API CALL - Text: 'test', Image: False
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+MAKING SINGLE API CALL - Text: 'tiens mon repas de ce soir', Image: False
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+Image successfully decoded, size: 109574 bytes
+Adding image to conversation. Media type: image/jpeg
+MAKING SINGLE API CALL - Text: '', Image: True
+INVOKE_MODEL - Requête avec 2 éléments: ['image', 'text']
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+Image successfully decoded, size: 109574 bytes
+Adding image to conversation. Media type: image/jpeg
+MAKING SINGLE API CALL - Text: '', Image: True
+CONTINUE_CONVERSATION - 3 messages total, dernier message avec 2 éléments: ['image', 'text']
+INVOKE_MODEL - Requête avec 1 éléments: ['text']
+ * Restarting with stat
+/home/ec2-user/.local/lib/python3.7/site-packages/boto3/compat.py:82: PythonDeprecationWarning: Boto3 will no longer support Python 3.7 starting December 13, 2023. To continue receiving service updates, bug fixes, and security updates please upgrade to Python 3.8 or later. More information can be found here: https://aws.amazon.com/blogs/developer/python-support-policy-updates-for-aws-sdks-and-tools/
+  warnings.warn(warning, PythonDeprecationWarning)
+ * Debugger is active!
+ * Debugger PIN: 493-952-303

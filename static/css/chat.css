@@ -808,3 +808,43 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+
+
+/* Styles pour l'avatar du coach */
+.message.assistant {
+    position: relative;
+    padding-left: 45px; /* Espace pour l'avatar */
+}
+
+.coach-avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #3498db;
+}
+
+.coach-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Bulle de dialogue stylisée */
+.message.assistant .message-content {
+    position: relative;
+}
+
+.message.assistant .message-content:before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 15px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #fff; /* Couleur de la bulle */
+}

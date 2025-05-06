@@ -85,6 +85,38 @@ def get_media_type(image_binary):
 def get_customized_system_prompt():
     customized_system_prompt = SYSTEM_PROMPT
 
+    # Personnalisation du prompt en fonction du coach choisi
+    if current_user.is_authenticated and current_user.coach:
+        if current_user.coach == 'maxence':
+            coach_personality = """
+Tu es Maxence, un coach sportif professionnel de 28 ans avec une approche intense et axée sur les résultats.
+Ton style de communication est:
+- Direct et sans détour
+- Exigeant mais motivant
+- Concentré sur la performance et les objectifs
+- Précis dans tes instructions
+- Utilisant parfois des expressions comme "Allez, on se dépasse!" ou "Pas d'excuses, des résultats!"
+
+En tant que Maxence, tu pousses les utilisateurs à se dépasser, mais tu restes attentif à leurs limites et à leur sécurité.
+Tu préfères les programmes d'entraînement intenses avec des périodes de récupération bien définies.
+"""
+            customized_system_prompt += coach_personality
+            
+        elif current_user.coach == 'sofia':
+            coach_personality = """
+Tu es Sofia, une coach sportive professionnelle de 32 ans avec une approche bienveillante et holistique du fitness.
+Ton style de communication est:
+- Encourageant et positif
+- Compréhensif et empathique
+- Axé sur le bien-être global et l'équilibre
+- Patient et attentif aux besoins individuels
+- Utilisant souvent des expressions comme "Super effort!" ou "Prends soin de ton corps, il est précieux"
+
+En tant que Sofia, tu motives les utilisateurs par l'encouragement plutôt que la pression, et tu mets l'accent sur la progression durable.
+Tu préfères une approche équilibrée qui inclut à la fois l'exercice, la nutrition et le bien-être mental.
+"""
+            customized_system_prompt += coach_personality
+
     # Ajouter des instructions de formatage et de structure
     formatting_instructions = """
 Pour toutes tes réponses, suis ces règles de formatage et de communication :
@@ -340,7 +372,18 @@ def chat():
         # Mettre à jour la liste des conversations
         conversations = Conversation.query.filter_by(user_id=current_user.id).order_by(Conversation.updated_at.desc()).all()
 
-    return render_template('chat.html', conversation=conversation, conversations=conversations)
+    # Préparation du nom du coach pour l'affichage
+    coach_name = None
+    if current_user.coach:
+        if current_user.coach == 'maxence':
+            coach_name = 'Maxence'
+        elif current_user.coach == 'sofia':
+            coach_name = 'Sofia'
+
+    return render_template('chat.html', 
+                          conversation=conversation, 
+                          conversations=conversations,
+                          coach_name=coach_name)
 
 @app.route('/select_coach', methods=['GET', 'POST'])
 @login_required
@@ -429,8 +472,25 @@ def send_message():
             "content": message.content
         })
 
-    # Obtenir le prompt personnalisé
+    # Obtenir le prompt personnalisé avec les infos du profil
     customized_system_prompt = get_customized_system_prompt()
+    
+    # Ajouter des instructions de style spécifiques à chaque interaction
+    if current_user.coach == 'maxence':
+        style_instruction = """
+N'oublie pas: Tu es Maxence, un coach intense et direct. Garde ton message concis et énergique.
+Si tu donnes des conseils, sois précis et exigeant. Utilise des expressions directes et motivantes.
+Limite tes messages à 3-4 paragraphes maximum pour rester percutant.
+"""
+        customized_system_prompt += style_instruction
+    
+    elif current_user.coach == 'sofia':
+        style_instruction = """
+N'oublie pas: Tu es Sofia, une coach bienveillante et compréhensive. Sois encourageante et positive.
+Si tu donnes des conseils, explique le "pourquoi" et pas seulement le "comment". Utilise un ton chaleureux.
+N'hésite pas à poser une question pour montrer ton intérêt pour le bien-être global de la personne.
+"""
+        customized_system_prompt += style_instruction
 
     # ====== TROISIÈME CHANGEMENT MAJEUR: PAS DE FORK CONDITIONNEL, UN SEUL CHEMIN ======
     print(f"MAKING SINGLE API CALL - Text: '{message_content}', Image: {image_binary is not None}")
