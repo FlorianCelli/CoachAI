@@ -5,7 +5,7 @@
 {% block content %}
 <div class="profile-container">
     <h1>Votre profil</h1>
-    
+
     <div class="profile-section">
         <h2>Informations personnelles</h2>
         <form method="POST" action="{{ url_for('update_profile') }}">
@@ -14,18 +14,18 @@
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" id="username" name="username" value="{{ current_user.username }}" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" value="{{ current_user.email }}" required>
             </div>
-            
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="age">Âge</label>
                     <input type="number" id="age" name="age" value="{{ current_user.age or '' }}">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="gender">Genre</label>
                     <select id="gender" name="gender">
@@ -36,21 +36,21 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="height">Taille (cm)</label>
                     <input type="number" step="0.1" id="height" name="height" value="{{ current_user.height or '' }}">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="weight">Poids (kg)</label>
                     <input type="number" step="0.1" id="weight" name="weight" value="{{ current_user.weight or '' }}">
                 </div>
             </div>
-            
+
             <h3>Objectifs et préférences fitness</h3>
-            
+
             <div class="form-group">
                 <label for="fitness_goal">Objectif principal</label>
                 <select id="fitness_goal" name="fitness_goal">
@@ -63,7 +63,7 @@
                     <option value="mobilite" {% if current_user.fitness_goal == 'mobilite' %}selected{% endif %}>Amélioration de la mobilité</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="fitness_level">Niveau d'expérience</label>
                 <select id="fitness_level" name="fitness_level">
@@ -73,7 +73,7 @@
                     <option value="avance" {% if current_user.fitness_level == 'avance' %}selected{% endif %}>Avancé</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="activity_level">Niveau d'activité quotidienne</label>
                 <select id="activity_level" name="activity_level">
@@ -85,7 +85,7 @@
                     <option value="tres_actif" {% if current_user.activity_level == 'tres_actif' %}selected{% endif %}>Très actif (exercice intense quotidien ou athlète)</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="equipment_access">Accès à l'équipement</label>
                 <select id="equipment_access" name="equipment_access">
@@ -96,25 +96,25 @@
                     <option value="salle" {% if current_user.equipment_access == 'salle' %}selected{% endif %}>Accès à une salle de sport complète</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="medical_conditions">Conditions médicales ou blessures</label>
                 <textarea id="medical_conditions" name="medical_conditions" rows="3">{{ current_user.medical_conditions or '' }}</textarea>
                 <small>Veuillez mentionner toute condition médicale, blessure ou limitation physique dont votre coach devrait être au courant.</small>
             </div>
-            
+
             <div class="form-group">
                 <label for="dietary_restrictions">Restrictions alimentaires</label>
                 <textarea id="dietary_restrictions" name="dietary_restrictions" rows="3">{{ current_user.dietary_restrictions or '' }}</textarea>
                 <small>Mentionnez vos préférences alimentaires, allergies ou régimes spécifiques (végétarien, sans gluten, etc.)</small>
             </div>
-            
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>
             </div>
         </form>
     </div>
-    
+
     <div class="profile-section">
         <h2>Changer de mot de passe</h2>
         <form method="POST" action="{{ url_for('change_password') }}">
@@ -123,21 +123,39 @@
                 <label for="current_password">Mot de passe actuel</label>
                 <input type="password" id="current_password" name="current_password" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="new_password">Nouveau mot de passe</label>
                 <input type="password" id="new_password" name="new_password" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="confirm_password">Confirmer le nouveau mot de passe</label>
                 <input type="password" id="confirm_password" name="confirm_password" required>
             </div>
-            
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Changer le mot de passe</button>
             </div>
         </form>
     </div>
+
+    {% if current_user.coach %}
+    <div class="coach-intro">
+        <h2>Vidéo d'introduction de votre coach</h2>
+        {% if current_user.coach == 'maxence' %}
+        <video width="320" height="240" controls>
+            <source src="https://coachaistorage.s3.us-east-1.amazonaws.com/intro_maxence+(1).mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+        {% elif current_user.coach == 'sofia' %}
+        <video width="320" height="240" controls>
+            <source src="https://coachaistorage.s3.us-east-1.amazonaws.com/intro_sofia.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+        {% endif %}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
+

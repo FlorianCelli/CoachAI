@@ -919,3 +919,44 @@ small {
     font-size: 0.8em;
   }
 }
+
+.coach-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.traits {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.trait {
+    flex: 1;
+    text-align: center;
+}
+
+.bar {
+    height: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.bar.high {
+    width: 80%;
+    background-color: #4caf50; /* Vert */
+}
+
+.bar.medium {
+    width: 50%;
+    background-color: #f39c12; /* Orange */
+}
+
+.bar.low {
+    width: 20%;
+    background-color: #e74c3c; /* Rouge */
+}
+

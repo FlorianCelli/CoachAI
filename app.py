@@ -9,12 +9,12 @@ import markdown
 import re
 
 from werkzeug.utils import secure_filename
-import os
 from io import BytesIO
 from PIL import Image
 import base64
 
 from models import init_app, User, Conversation, Message, WorkoutPlan, NutritionPlan, WorkoutLog
+from models.user import db  # Importer db ici
 from utils.bedrock_client import BedrockClient
 from utils.fitness_prompts import (
     SYSTEM_PROMPT, INITIAL_ASSESSMENT_PROMPT, WORKOUT_PLAN_PROMPT,
@@ -60,7 +60,7 @@ def markdown_filter(text):
 @app.context_processor
 def inject_now():
     return {'now': datetime.utcnow()}
-	
+
 def get_media_type(image_binary):
     """
     Determine the MIME type of an image from its binary data
@@ -175,7 +175,7 @@ Pour toutes tes réponses, suis ces règles de formatage et de communication :
 @app.route('/')
 def index():
     now = datetime.now()
-    return render_template('index.html', now=now)  # Correctement indenté
+    return render_template('index.html', now=now)
 
 # Routes d'authentification
 @app.route('/login', methods=['GET', 'POST'])
@@ -194,7 +194,7 @@ def login():
             login_user(user, remember=remember_me)
             next_page = request.args.get('next')
             if not next_page or not next_page.startswith('/'):
-                next_page = url_for('index')
+                next_page = url_for('select_coach')  # Rediriger vers la sélection du coach
             flash('Connexion réussie!', 'success')
             return redirect(next_page)
         else:
@@ -232,7 +232,6 @@ def register():
         new_user = User(username=username, email=email)
         new_user.set_password(password)
 
-        from models.user import db
         db.session.add(new_user)
         db.session.commit()
 
@@ -269,7 +268,6 @@ def update_profile():
     user.medical_conditions = request.form.get('medical_conditions')
     user.dietary_restrictions = request.form.get('dietary_restrictions')
 
-    from models.user import db
     db.session.commit()
 
     flash('Votre profil a été mis à jour avec succès!', 'success')
@@ -292,7 +290,6 @@ def change_password():
 
     current_user.set_password(new_password)
 
-    from models.user import db
     db.session.commit()
 
     flash('Votre mot de passe a été changé avec succès!', 'success')
@@ -316,7 +313,6 @@ def chat():
         # Créer une nouvelle conversation
         conversation = Conversation(user_id=current_user.id, title="Nouvelle conversation")
 
-        from models.user import db
         db.session.add(conversation)
         db.session.commit()
 
@@ -346,6 +342,20 @@ def chat():
 
     return render_template('chat.html', conversation=conversation, conversations=conversations)
 
+@app.route('/select_coach', methods=['GET', 'POST'])
+@login_required
+def select_coach():
+    if request.method == 'POST':
+        coach = request.form.get('coach')
+        if coach in ['maxence', 'sofia']:
+            current_user.coach = coach
+            db.session.commit()
+            flash('Votre coach a été sélectionné avec succès!', 'success')
+            return redirect(url_for('profile'))
+        else:
+            flash('Sélection invalide.', 'error')
+    return render_template('select_coach.html')
+
 @app.route('/message-image/<int:message_id>')
 @login_required
 def get_message_image(message_id):
@@ -354,12 +364,11 @@ def get_message_image(message_id):
     conversation = Conversation.query.get_or_404(message.conversation_id)
     if conversation.user_id != current_user.id:
         abort(403)
-    
+
     if not message.image_path:
         abort(404)
-    
-    return send_from_directory(app.config['UPLOAD_FOLDER'], message.image_path)
 
+    return send_from_directory(app.config['UPLOAD_FOLDER'], message.image_path)
 
 @app.route('/chat/send', methods=['POST'])
 @login_required
@@ -373,8 +382,6 @@ def send_message():
     # Vérifier qu'il y a au moins un message ou une image
     if not message_content and not image_data:
         return jsonify({'error': 'Message or image must be provided'}), 400
-
-    from models.user import db
 
     # Récupérer ou créer la conversation
     if not conversation_id:
@@ -393,11 +400,11 @@ def send_message():
             clean_image_data = image_data
             if "," in image_data:
                 clean_image_data = image_data.split(",", 1)[1]
-            
+
             # Décoder l'image
             image_binary = base64.b64decode(clean_image_data)
             print(f"Image successfully decoded, size: {len(image_binary)} bytes")
-            
+
             # Déterminer le type MIME
             media_type = get_media_type(image_binary)
             print(f"Adding image to conversation. Media type: {media_type}")
@@ -411,9 +418,9 @@ def send_message():
         image_html = f'<div class="user-image-container"><img src="{image_data}" class="user-image" alt="Image utilisateur"></div>'
         text_html = f'<div class="user-text">{message_content}</div>' if message_content else ''
         display_content = f'{image_html}{text_html}'
-    
+
     # ====== SECOND CHANGEMENT MAJEUR: EFFECTUER L'APPEL API AVANT D'AJOUTER MESSAGES À LA BDD ======
-    
+
     # Obtenir l'historique des messages SANS le nouveau message
     message_history = []
     for message in conversation.messages.order_by(Message.created_at).all():
@@ -424,16 +431,16 @@ def send_message():
 
     # Obtenir le prompt personnalisé
     customized_system_prompt = get_customized_system_prompt()
-    
+
     # ====== TROISIÈME CHANGEMENT MAJEUR: PAS DE FORK CONDITIONNEL, UN SEUL CHEMIN ======
     print(f"MAKING SINGLE API CALL - Text: '{message_content}', Image: {image_binary is not None}")
-    
+
     try:
         # UN SEUL APPEL API - jamais deux
         if len(message_history) == 0:
             # Première interaction
             response_content = bedrock_client.invoke_model(
-                message_content, 
+                message_content,
                 system_prompt=customized_system_prompt,
                 image_data=image_binary  # Peut être None, la méthode gère ce cas
             )
@@ -445,13 +452,13 @@ def send_message():
                 system_prompt=customized_system_prompt,
                 image_data=image_binary  # Peut être None, la méthode gère ce cas
             )
-            
+
         # ====== QUATRIÈME CHANGEMENT: AJOUTER LES MESSAGES À LA BDD APRÈS L'APPEL API ======
-        
+
         # Ajouter le message utilisateur à la BDD
         user_message = Message(conversation_id=conversation_id, role="user", content=display_content)
         db.session.add(user_message)
-        
+
         # Ajouter la réponse de l'assistant à la BDD
         assistant_message = Message(conversation_id=conversation_id, role="assistant", content=response_content)
         db.session.add(assistant_message)
@@ -484,8 +491,6 @@ def send_message():
 @app.route('/chat/new', methods=['POST'])
 @login_required
 def new_conversation():
-    from models.user import db
-
     conversation = Conversation(user_id=current_user.id, title="Nouvelle conversation")
     db.session.add(conversation)
     db.session.commit()
@@ -508,7 +513,6 @@ def rename_conversation(conversation_id):
 
     conversation.title = new_title
 
-    from models.user import db
     db.session.commit()
 
     return jsonify({'success': True})
@@ -518,7 +522,6 @@ def rename_conversation(conversation_id):
 def delete_conversation(conversation_id):
     conversation = Conversation.query.filter_by(id=conversation_id, user_id=current_user.id).first_or_404()
 
-    from models.user import db
     db.session.delete(conversation)
     db.session.commit()
 
@@ -528,8 +531,6 @@ def delete_conversation(conversation_id):
 @app.route('/delete-all-conversations', methods=['POST'])
 @login_required
 def delete_all_conversations():
-    from models.user import db
-
     # Récupérer toutes les conversations de l'utilisateur
     conversations = Conversation.query.filter_by(user_id=current_user.id).all()
 
@@ -601,7 +602,6 @@ def create_workout_plan():
         plan_content=plan_content
     )
 
-    from models.user import db
     db.session.add(workout_plan)
     db.session.commit()
 
@@ -618,7 +618,6 @@ def edit_workout_plan(plan_id):
         plan.description = request.form.get('description')
         plan.plan_content = request.form.get('plan_content')
 
-        from models.user import db
         db.session.commit()
 
         flash('Votre programme d\'entraînement a été mis à jour avec succès!', 'success')
@@ -631,7 +630,6 @@ def edit_workout_plan(plan_id):
 def delete_workout_plan(plan_id):
     plan = WorkoutPlan.query.filter_by(id=plan_id, user_id=current_user.id).first_or_404()
 
-    from models.user import db
     db.session.delete(plan)
     db.session.commit()
 
@@ -658,7 +656,6 @@ def log_workout(plan_id):
             notes=notes
         )
 
-        from models.user import db
         db.session.add(workout_log)
         db.session.commit()
 
@@ -762,7 +759,6 @@ def create_nutrition_plan():
         plan_content=plan_content
     )
 
-    from models.user import db
     db.session.add(nutrition_plan)
     db.session.commit()
 
@@ -794,7 +790,6 @@ def edit_nutrition_plan(plan_id):
         if fat_percentage:
             plan.fat_percentage = fat_percentage
 
-        from models.user import db
         db.session.commit()
 
         flash('Votre plan nutritionnel a été mis à jour avec succès!', 'success')
@@ -807,7 +802,6 @@ def edit_nutrition_plan(plan_id):
 def delete_nutrition_plan(plan_id):
     plan = NutritionPlan.query.filter_by(id=plan_id, user_id=current_user.id).first_or_404()
 
-    from models.user import db
     db.session.delete(plan)
     db.session.commit()
 
@@ -837,3 +831,4 @@ def generate_conversation_title(first_message):
 # Lancement de l'application
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+

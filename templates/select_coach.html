@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+
+{% block title %}Sélectionnez votre coach{% endblock %}
+
+{% block content %}
+<div class="coach-selection-page">
+    <div class="container">
+        <h1 class="main-title">Choisissez le coach qui vous correspond</h1>
+
+        <form method="POST" action="{{ url_for('select_coach') }}">
+            <!-- Ajouter le jeton CSRF -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="coach-cards-container">
+                <!-- Coach Maxence -->
+                <div class="coach-card">
+                    <div class="coach-header">
+                        <h2>Maxence</h2>
+                    </div>
+                    <div class="video-container fixed-ratio">
+                        <video controls>
+                            <source src="{{ url_for('static', filename='coachvideos/intro_maxence (1).mp4') }}" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="coach-info">
+                        <div class="coach-style">
+                            <strong>Style :</strong> Intense, exigeant, axé performance
+                        </div>
+
+                        <div class="coach-traits">
+                            <div class="trait">
+                                <div class="trait-label">Intensité</div>
+                                <div class="trait-bar">
+                                    <div class="trait-fill intensity-high" style="width: 90%"></div>
+                                </div>
+                                <div class="trait-percent">90%</div>
+                            </div>
+
+                            <div class="trait">
+                                <div class="trait-label">Encouragement</div>
+                                <div class="trait-bar">
+                                    <div class="trait-fill intensity-medium" style="width: 60%"></div>
+                                </div>
+                                <div class="trait-percent">60%</div>
+                            </div>
+
+                            <div class="trait">
+                                <div class="trait-label">Flexibilité</div>
+                                <div class="trait-bar">
+                                    <div class="trait-fill intensity-low" style="width: 30%"></div>
+                                </div>
+                                <div class="trait-percent">30%</div>
+                            </div>
+                        </div>
+
+                        <div class="coach-select">
+                            <input type="radio" id="maxence" name="coach" value="maxence" required>
+                            <label for="maxence">Choisir Maxence</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coach Sofia -->
+                <div class="coach-card">
+                    <div class="coach-header">
+                        <h2>Sofia</h2>
+                    </div>
+                    <div class="video-container fixed-ratio">
+                        <video controls>
+                            <source src="{{ url_for('static', filename='coachvideos/intro_sofia.mp4') }}" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="coach-info">
+                        <div class="coach-style">
+                            <strong>Style :</strong> Bienveillant, motivant, axé bien-être
+                        </div>
+
+                        <div class="coach-traits">
+                            <div class="trait">
+                                <div class="trait-label">Intensité</div>
+                                <div class="trait-bar">
+                                    <div class="trait-fill intensity-medium" style="width: 60%"></div>
+                                </div>
+                                <div class="trait-percent">60%</div>
+                            </div>
+
+                            <div class="trait">
+                                <div class="trait-label">Encouragement</div>
+                                <div class="trait-bar">
+                                    <div class="trait-fill intensity-high" style="width: 90%"></div>
+                                </div>
+                                <div class="trait-percent">90%</div>
+                            </div>
+
+                            <div class="trait">
+                                <div class="trait-label">Flexibilité</div>
+                                <div class="trait-bar">
+                                    <div class="trait-fill intensity-high" style="width: 85%"></div>
+                                </div>
+                                <div class="trait-percent">85%</div>
+                            </div>
+                        </div>
+
+                        <div class="coach-select">
+                            <input type="radio" id="sofia" name="coach" value="sofia" required>
+                            <label for="sofia">Choisir Sofia</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-btn">
+                <button type="submit" class="submit-button">Valider ma sélection</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Styles de base */
+.coach-selection-page {
+    padding: 40px 0;
+    background-color: #f8f9fa;
+}
+
+.main-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Layout des cards côte à côte */
+.coach-cards-container {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* Style des cards */
+.coach-card {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.coach-header {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.coach-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Container vidéo avec ratio fixe */
+.video-container {
+    position: relative;
+    width: 100%;
+}
+
+.fixed-ratio {
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #000;
+}
+
+/* Info coach */
+.coach-info {
+    padding: 20px;
+}
+
+.coach-style {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+/* Jauges de traits de caractère */
+.coach-traits {
+    margin-bottom: 25px;
+}
+
+.trait {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.trait-label {
+    width: 110px;
+    font-weight: 500;
+}
+
+.trait-bar {
+    flex-grow: 1;
+    height: 12px;
+    background-color: #e9ecef;
+    border-radius: 6px;
+    margin: 0 10px;
+    overflow: hidden;
+}
+
+.trait-fill {
+    height: 100%;
+    border-radius: 6px;
+}
+
+.intensity-high {
+    background-color: #dc3545;
+}
+
+.intensity-medium {
+    background-color: #ffc107;
+}
+
+.intensity-low {
+    background-color: #6c757d;
+}
+
+.trait-percent {
+    width: 40px;
+    text-align: right;
+    font-weight: 500;
+}
+
+/* Sélection coach */
+.coach-select {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.coach-select label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.coach-select input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.coach-select input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Bouton d'action */
+.action-btn {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.submit-button {
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #0069d9;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .coach-cards-container {
+        flex-direction: column;
+    }
+
+    .coach-card {
+        margin-bottom: 30px;
+    }
+}
+</style>
+{% endblock %}
+

@@ -3,15 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>{% block title %}FitCoach IA{% endblock %}</title>
+    
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS principal -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
     {% block extra_css %}{% endblock %}
+    
+    <style>
+    /* CSS additionnel pour assurer une mise en page responsive et esthétique */
+    .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: auto;
+        padding: 1rem;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-menu {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .navbar-burger {
+        display: none; /* Modifie cette propriété si tu ajoutes du JS pour menu mobile */
+    }
+
+    main {
+        padding: 2rem 0;
+    }
+
+    .footer-content {
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    /* Style pour les alertes */
+    .alert {
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    .alert-success { background-color: #d4edda; color: #155724; }
+    .alert-danger { background-color: #f8d7da; color: #721c24; }
+    .alert-info { background-color: #d1ecf1; color: #0c5460; }
+    .alert-warning { background-color: #fff3cd; color: #856404; }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .navbar-menu {
+            display: none; /* à changer si JS burger menu */
+        }
+        .navbar-burger {
+            display: block;
+        }
+    }
+    </style>
 </head>
+
 <body>
     <header>
-        <nav class="navbar">
+        <nav class="navbar container">
             <div class="navbar-brand">
                 <a href="{{ url_for('index') }}">
                     <i class="fas fa-dumbbell"></i> FitCoach IA
@@ -19,14 +79,14 @@
             </div>
             <div class="navbar-menu">
                 {% if current_user.is_authenticated %}
-                <a href="{{ url_for('chat') }}"><i class="fas fa-comments"></i> Discussion</a>
-                <a href="{{ url_for('workout_plans') }}"><i class="fas fa-running"></i> Programmes</a>
-                <a href="{{ url_for('nutrition_plans') }}"><i class="fas fa-apple-alt"></i> Nutrition</a>
-                <a href="{{ url_for('profile') }}"><i class="fas fa-user"></i> Profil</a>
-                <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    <a href="{{ url_for('chat') }}"><i class="fas fa-comments"></i> Discussion</a>
+                    <a href="{{ url_for('workout_plans') }}"><i class="fas fa-running"></i> Programmes</a>
+                    <a href="{{ url_for('nutrition_plans') }}"><i class="fas fa-apple-alt"></i> Nutrition</a>
+                    <a href="{{ url_for('profile') }}"><i class="fas fa-user"></i> Profil</a>
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
                 {% else %}
-                <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Connexion</a>
-                <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Inscription</a>
+                    <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+                    <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Inscription</a>
                 {% endif %}
             </div>
             <div class="navbar-burger">
@@ -34,8 +94,8 @@
             </div>
         </nav>
     </header>
-    
-    <main>
+
+    <main class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -45,19 +105,20 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        
+
         {% block content %}{% endblock %}
     </main>
-    
+
     {% block footer %}
     <footer class="site-footer">
-        <div class="footer-content">
-            <p>&copy; {{ now.year }} FitCoach IA - Votre coach sportif personnel propulsé par Claude 3.7 Sonnet</p>
+        <div class="footer-content container">
+            <p>&copy; {{ now.year }} FitCoach IA - Votre coach sportif personnel propulsé par l'intelligence artificielle</p>
         </div>
     </footer>
     {% endblock %}
-    
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
+
