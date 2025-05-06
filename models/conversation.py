@@ -1,3 +1,4 @@
+# models/conversation.py
 from datetime import datetime
 from models.user import db
 

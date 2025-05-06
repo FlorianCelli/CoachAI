@@ -8,6 +8,12 @@ import json
 import markdown
 import re
 
+from werkzeug.utils import secure_filename
+import os
+from io import BytesIO
+from PIL import Image
+import base64
+
 from models import init_app, User, Conversation, Message, WorkoutPlan, NutritionPlan, WorkoutLog
 from utils.bedrock_client import BedrockClient
 from utils.fitness_prompts import (
@@ -32,6 +38,13 @@ init_app(app)
 
 # Initialisation du client Bedrock
 bedrock_client = BedrockClient(app.config['AWS_REGION'], app.config['BEDROCK_MODEL_ID'])
+
+# Définir les extensions d'images autorisées
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Configuration du système de login
 @login_manager.user_loader
@@ -313,15 +326,31 @@ def chat():
 
     return render_template('chat.html', conversation=conversation, conversations=conversations)
 
+@app.route('/message-image/<int:message_id>')
+@login_required
+def get_message_image(message_id):
+    message = Message.query.get_or_404(message_id)
+    # Vérifier que l'utilisateur a accès à cette image
+    conversation = Conversation.query.get_or_404(message.conversation_id)
+    if conversation.user_id != current_user.id:
+        abort(403)
+    
+    if not message.image_path:
+        abort(404)
+    
+    return send_from_directory(app.config['UPLOAD_FOLDER'], message.image_path)
+
+
 @app.route('/chat/send', methods=['POST'])
 @login_required
 def send_message():
     data = request.json
-    message_content = data.get('message')
+    message_content = data.get('message', '')
     conversation_id = data.get('conversation_id')
+    image_data = data.get('image_data')  # base64 image data
 
-    if not message_content:
-        return jsonify({'error': 'Message cannot be empty'}), 400
+    if not message_content and not image_data:
+        return jsonify({'error': 'Message or image must be provided'}), 400
 
     from models.user import db
 
@@ -334,14 +363,22 @@ def send_message():
     else:
         conversation = Conversation.query.filter_by(id=conversation_id, user_id=current_user.id).first_or_404()
 
+    # Préparer le contenu HTML pour l'affichage du message utilisateur
+    display_content = message_content
+    if image_data:
+        # Créer une version HTML du message avec l'image pour l'affichage
+        image_html = f'<div class="user-image-container"><img src="{image_data}" class="user-image" alt="Image utilisateur"></div>'
+        text_html = f'<div class="user-text">{message_content}</div>' if message_content else ''
+        display_content = f'{image_html}{text_html}'
+
     # Ajouter le message de l'utilisateur
-    user_message = Message(conversation_id=conversation_id, role="user", content=message_content)
+    user_message = Message(conversation_id=conversation_id, role="user", content=display_content)
     db.session.add(user_message)
     db.session.commit()
 
-    # Préparer l'historique de conversation pour Claude
+    # Préparer l'historique de conversation pour Claude (sans inclure le message qu'on vient d'ajouter)
     message_history = []
-    for message in conversation.messages.order_by(Message.created_at).all():
+    for message in conversation.messages.filter(Message.id != user_message.id).order_by(Message.created_at).all():
         message_history.append({
             "role": message.role,
             "content": message.content
@@ -350,42 +387,67 @@ def send_message():
     # Obtenir le prompt personnalisé avec les infos du profil
     customized_system_prompt = get_customized_system_prompt()
 
+    # Traitement de l'image si présente
+    image_binary = None
+    if image_data:
+        try:
+            # Nettoyer l'image data:image base64
+            clean_image_data = image_data
+            if "," in image_data:
+                clean_image_data = image_data.split(",", 1)[1]
+            
+            # Décoder l'image
+            image_binary = base64.b64decode(clean_image_data)
+            print(f"Image successfully decoded, size: {len(image_binary)} bytes")
+        except Exception as e:
+            print(f"Error decoding image: {str(e)}")
+            return jsonify({'error': 'Invalid image data'}), 400
+
     # Obtenir la réponse du coach IA
-    if len(message_history) <= 1:
-        # Première interaction, utiliser invoke_model
-        response_content = bedrock_client.invoke_model(message_content, system_prompt=customized_system_prompt)
-    else:
-        # Conversation en cours, utiliser continue_conversation
-        # Exclure le dernier message (celui qu'on vient d'ajouter)
-        response_content = bedrock_client.continue_conversation(
-            message_history[:-1],
-            message_content,
-            system_prompt=customized_system_prompt
-        )
+    try:
+        if len(message_history) == 0:
+            # Première interaction, utiliser invoke_model
+            response_content = bedrock_client.invoke_model(
+                message_content, 
+                system_prompt=customized_system_prompt,
+                image_data=image_binary
+            )
+        else:
+            # Conversation en cours, utiliser continue_conversation
+            response_content = bedrock_client.continue_conversation(
+                message_history,
+                message_content,
+                system_prompt=customized_system_prompt,
+                image_data=image_binary
+            )
 
-    # Ajouter la réponse
-    assistant_message = Message(conversation_id=conversation_id, role="assistant", content=response_content)
-    db.session.add(assistant_message)
+        # Ajouter la réponse
+        assistant_message = Message(conversation_id=conversation_id, role="assistant", content=response_content)
+        db.session.add(assistant_message)
 
-    # Si c'est une nouvelle conversation, générer un titre
-    if conversation.title == "Nouvelle conversation":
-        conversation.title = generate_conversation_title(message_content)
+        # Si c'est une nouvelle conversation, générer un titre
+        if conversation.title == "Nouvelle conversation":
+            conversation.title = generate_conversation_title(message_content)
 
-    # Mettre à jour la date de la conversation
-    conversation.updated_at = datetime.utcnow()
-    db.session.commit()
+        # Mettre à jour la date de la conversation
+        conversation.updated_at = datetime.utcnow()
+        db.session.commit()
 
-    return jsonify({
-        'user_message': {
-            'content': user_message.content,
-            'time': user_message.created_at.strftime('%H:%M')
-        },
-        'assistant_message': {
-            'content': assistant_message.content,
-            'time': assistant_message.created_at.strftime('%H:%M')
-        },
-        'conversation_id': conversation_id
-    })
+        return jsonify({
+            'user_message': {
+                'content': user_message.content,
+                'time': user_message.created_at.strftime('%H:%M')
+            },
+            'assistant_message': {
+                'content': assistant_message.content,
+                'time': assistant_message.created_at.strftime('%H:%M')
+            },
+            'conversation_id': conversation_id
+        })
+    except Exception as e:
+        print(f"Error getting response from AI: {str(e)}")
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/chat/new', methods=['POST'])
 @login_required
@@ -743,4 +805,3 @@ def generate_conversation_title(first_message):
 # Lancement de l'application
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-

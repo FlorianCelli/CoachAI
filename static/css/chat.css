@@ -1,4 +1,5 @@
-/* Styles de base pour le conteneur de chat */
+ 
+ /* Styles de base pour le conteneur de chat */
 .chat-container {
   display: flex;
   height: calc(100vh - 60px);
@@ -495,5 +496,185 @@
   
   .assistant .message-content table {
     font-size: 0.8em;
+  }
+}
+
+/* Styles pour les fonctionnalités d'image */
+.image-upload-container {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.image-upload-btn {
+  background-color: #f0f2f5;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #3498db;
+}
+
+.image-upload-btn:hover {
+  background-color: #e4e6e9;
+}
+
+.image-upload-btn i {
+  font-size: 1.2rem;
+}
+
+.image-input {
+  display: none;
+}
+
+.image-preview-container {
+  margin: 10px 15px;
+  position: relative;
+  display: inline-block;
+  max-width: 200px;
+}
+
+.image-preview-container.hidden {
+  display: none;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.remove-image-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Styles pour les messages avec images */
+.user-message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-image {
+  max-width: 100%;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  border-radius: 8px;
+  max-height: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-text {
+  margin-top: 5px;
+}
+
+/* Styles pour les images dans les réponses de l'IA */
+.ai-response-image {
+  max-width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 8px 0;
+}
+
+.ai-response-image:hover {
+  opacity: 0.9;
+  transform: scale(1.01);
+}
+
+/* Lightbox pour la visualisation d'image plein écran */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.show {
+  opacity: 1;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.lightbox.show .lightbox-content {
+  transform: scale(1);
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.close-lightbox {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.close-lightbox:hover {
+  transform: scale(1.1);
+}
+
+/* Adaptation pour mobile */
+@media (max-width: 768px) {
+  .image-preview-container {
+    max-width: 150px;
+  }
+
+  .uploaded-image {
+    max-height: 200px;
+  }
+
+  .lightbox-content {
+    max-width: 95%;
   }
 }
