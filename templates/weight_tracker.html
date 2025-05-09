@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Suivi du poids</h2>
+
+    <!-- Formulaire d'ajout -->
+    <form method="POST" action="{{ url_for('track_weight') }}" class="form-inline mt-3 mb-4">
+        <div class="form-group">
+            <label for="weight">Poids (kg) :</label>
+            <input type="number" step="0.1" name="weight" id="weight" class="form-control mx-2" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+
+    <!-- Messages flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} mt-2">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Courbe -->
+    {% if chart_data %}
+        <h4>Courbe de progression</h4>
+        <img src="data:image/png;base64,{{ chart_data }}" alt="Courbe de poids" class="img-fluid mt-3 mb-4">
+    {% else %}
+        <p>Aucune donnée de poids enregistrée pour le moment.</p>
+    {% endif %}
+
+    <!-- Historique -->
+    {% if entries %}
+        <h5>Historique des poids</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Poids (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                    <tr>
+                        <td>{{ entry.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ entry.weight }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}
+

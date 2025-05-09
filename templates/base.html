@@ -519,6 +519,10 @@
     </style>
 
     {% block extra_css %}{% endblock %}
+
+    <!-- CSRF token pour les requêtes JS -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
