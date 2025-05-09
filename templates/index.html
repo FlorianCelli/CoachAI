@@ -1,62 +1,1087 @@
 {% extends 'base.html' %}
 
-{% block title %}FitCoach IA - Votre coach sportif personnel{% endblock %}
+{% block title %}FitCoach AI - Votre coach sportif personnel{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Animations */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes gradientFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes shine {
+        0% { background-position: -100px; }
+        60%, 100% { background-position: 500px; }
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        position: relative;
+        padding: 80px 0 60px;
+        overflow: hidden;
+    }
+    
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(120deg, var(--primary) 0%, var(--secondary) 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        z-index: -1;
+    }
+    
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        position: relative;
+    }
+    
+    .hero-content {
+        color: var(--light);
+        padding-top: 40px;
+    }
+    
+    .hero-title {
+        font-size: 4.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 30px;
+        background: linear-gradient(to right, #fff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 5s infinite linear;
+        background-size: 200% 100%;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.95);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hero-visual {
+        position: relative;
+    }
+    
+    .coach-selector {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+        transform: perspective(1000px) rotateY(-15deg);
+        position: relative;
+        z-index: 2;
+    }
+    
+    .coach-selector:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 20px;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        z-index: -1;
+        pointer-events: none;
+    }
+    
+    .coach-selector:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 20px;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        z-index: 1;
+        pointer-events: none;
+    }
+    
+    .selector-header {
+        text-align: center;
+        color: white;
+        margin-bottom: 10px;
+    }
+    
+    .selector-header h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+    
+    .selector-header p {
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+    
+    .coach-cards {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .coach-card {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .coach-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .coach-card.maxence:hover {
+        border-color: rgba(236, 72, 153, 0.8);
+    }
+    
+    .coach-card.sofia:hover {
+        border-color: rgba(99, 102, 241, 0.8);
+    }
+    
+    .coach-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .coach-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .coach-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 5px;
+    }
+    
+    .coach-specialty {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 15px;
+    }
+    
+    .coach-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: white;
+    }
+    
+    .maxence .coach-badge {
+        background: linear-gradient(45deg, var(--secondary), var(--secondary-dark));
+    }
+    
+    .sofia .coach-badge {
+        background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    }
+    
+    .selector-footer {
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    /* Floating shapes */
+    .floating-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    
+    .shape {
+        position: absolute;
+        opacity: 0.2;
+        z-index: 0;
+    }
+    
+    .shape-circle {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: var(--primary);
+        top: -100px;
+        left: -100px;
+        animation: float 8s infinite ease-in-out;
+    }
+    
+    .shape-donut {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 40px solid var(--secondary);
+        bottom: 10%;
+        right: 5%;
+        animation: float 12s infinite ease-in-out reverse;
+    }
+    
+    .shape-triangle {
+        width: 0;
+        height: 0;
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-bottom: 250px solid var(--primary-dark);
+        top: 40%;
+        left: 15%;
+        transform: rotate(20deg);
+        animation: float 15s infinite ease-in-out;
+    }
+    
+    /* CTA Buttons */
+    .btn-container {
+        display: flex;
+        gap: 15px;
+        position: relative;
+        z-index: 10;
+    }
+    
+    /* Features Section */
+    .features-section {
+        padding: 100px 0;
+        position: relative;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    
+    .section-title {
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+    
+    .section-subtitle {
+        font-size: 1.2rem;
+        color: var(--gray);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .feature-card {
+        background: var(--light);
+        border-radius: 24px;
+        padding: 35px 25px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-card:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+    }
+    
+    .feature-card:hover:before {
+        transform: scaleX(1);
+    }
+    
+    .feature-icon {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        background: var(--gray-light);
+        color: var(--primary);
+        font-size: 1.8rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .feature-icon:before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        border-radius: 30px;
+        z-index: -1;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.4s ease;
+    }
+    
+    .feature-card:hover .feature-icon:before {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    .feature-card:hover .feature-icon {
+        color: white;
+        background: transparent;
+    }
+    
+    .feature-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--dark);
+    }
+    
+    .feature-desc {
+        color: var(--gray);
+        line-height: 1.7;
+    }
+    
+    /* Testimonials */
+    .testimonials-section {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .testimonials-container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .testimonials-header {
+        text-align: center;
+        margin-bottom: 60px;
+        color: white;
+    }
+    
+    .testimonials-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+    
+    .testimonials-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+    }
+    
+    .testimonial-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .testimonial-content {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 20px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    
+    .testimonial-content:before {
+        content: '"';
+        font-size: 4rem;
+        position: absolute;
+        top: -25px;
+        left: -10px;
+        opacity: 0.2;
+        font-family: Georgia, serif;
+        z-index: 0;
+    }
+    
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    
+    .author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .author-info {
+        flex: 1;
+    }
+    
+    .author-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+    
+    .author-role {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+    
+    .testimonial-rating {
+        margin-top: 5px;
+        color: #fbbf24;
+    }
+    
+    /* Results Section */
+    .results-section {
+        padding: 100px 0;
+        text-align: center;
+        background: var(--gray-light);
+    }
+    
+    .results-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: linear-gradient(to right, var(--primary-dark), var(--secondary-dark));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .results-desc {
+        font-size: 1.2rem;
+        color: var(--gray);
+        max-width: 800px;
+        margin: 0 auto 50px;
+        line-height: 1.6;
+    }
+    
+    .stats-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 60px;
+    }
+    
+    .stat-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        min-width: 200px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .stat-label {
+        font-size: 1.1rem;
+        color: var(--gray);
+        font-weight: 500;
+    }
+    
+    .results-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+    }
+    
+    .result-item {
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .result-item img {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        transition: all 0.5s ease;
+    }
+    
+    .result-item:hover img {
+        transform: scale(1.1);
+    }
+    
+    .result-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+        color: white;
+        transition: all 0.3s ease;
+    }
+    
+    .result-overlay h4 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+    
+    .result-overlay p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+        padding: 100px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .cta-container {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 30px;
+        padding: 80px 60px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(99, 102, 241, 0.2);
+    }
+    
+    .cta-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+    
+    .cta-text {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 800px;
+        margin: 0 auto 40px;
+        line-height: 1.6;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    /* Animation for the CTA button */
+    .btn-cta {
+        padding: 18px 35px;
+        font-size: 1.1rem;
+        border-radius: 15px;
+        background: white;
+        color: var(--primary);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .btn-cta:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 70%);
+        z-index: -1;
+        transform: translateX(-100%) skewX(-15deg);
+        transition: all 0.6s ease;
+    }
+    
+    .btn-cta:hover:before {
+        transform: translateX(100%) skewX(-15deg);
+    }
+    
+    .btn-cta:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-cta-outline {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+    
+    .btn-cta-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Decorative elements for CTA */
+    .cta-shape {
+        position: absolute;
+        z-index: 0;
+    }
+    
+    .cta-shape-1 {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        top: -150px;
+        left: -100px;
+    }
+    
+    .cta-shape-2 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        bottom: -100px;
+        right: -50px;
+    }
+    
+    /* Media Queries */
+    @media (min-width: 1400px) {
+        .container {
+            max-width: 1320px;
+        }
+    }
+    
+    @media (max-width: 1200px) {
+        .hero-title {
+            font-size: 3.5rem;
+        }
+        
+        .coach-avatar {
+            width: 90px;
+            height: 90px;
+        }
+        
+        .coach-selector {
+            transform: none;
+        }
+        
+        .section-title, .testimonials-title, .results-title, .cta-title {
+            font-size: 2.5rem;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .hero-content {
+            order: 2;
+            text-align: center;
+            padding-top: 0;
+        }
+        
+        .hero-visual {
+            order: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .coach-selector {
+            margin: 0 auto;
+        }
+        
+        .btn-container {
+            justify-content: center;
+        }
+        
+        .testimonials-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-container {
+            padding: 60px 30px;
+        }
+        
+        .features-section, .testimonials-section, .cta-section {
+            padding: 70px 0;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.8rem;
+        }
+        
+        .coach-cards {
+            flex-direction: column;
+        }
+        
+        .stats-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cta-title {
+            font-size: 2.3rem;
+        }
+        
+        .container {
+            padding: 0 20px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-title, .section-title, .testimonials-title, .results-title {
+            font-size: 2rem;
+        }
+        
+        .hero-subtitle, .section-subtitle, .testimonials-subtitle, .cta-text {
+            font-size: 1rem;
+        }
+        
+        .btn-container {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .btn {
+            width: 100%;
+        }
+        
+        .cta-container {
+            padding: 50px 20px;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-content">
-        <h1>Votre coach sportif personnel alimenté par l'IA</h1>
-        <p>Obtenez des programmes d'entraînement personnalisés, des conseils nutritionnels et un soutien motivationnel adaptés à vos objectifs et besoins.</p>
-        {% if not current_user.is_authenticated %}
-        <div class="cta-buttons">
-            <a href="{{ url_for('register') }}" class="btn btn-primary">Commencer</a>
-            <a href="{{ url_for('login') }}" class="btn btn-secondary">Se connecter</a>
-        </div>
-        {% else %}
-        <div class="cta-buttons">
-            <a href="{{ url_for('chat') }}" class="btn btn-primary">Discuter avec votre coach</a>
-            <a href="{{ url_for('profile') }}" class="btn btn-secondary">Voir votre profil</a>
-        </div>
-        {% endif %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-background"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-donut"></div>
+        <div class="shape shape-triangle"></div>
     </div>
-    <div class="hero-image">
-        <img src="{{ url_for('static', filename='img/fitness-coach.svg') }}" alt="Coach sportif">
+
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1 class="hero-title">Transformez votre corps avec FitCoach AI</h1>
+                <p class="hero-subtitle">Programmes d'entraînement personnalisés, conseils nutritionnels et coaching motivationnel adaptés à vos objectifs avec l'intelligence artificielle de pointe.</p>
+                
+                <div class="btn-container">
+                    {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('register') }}" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> Commencer
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-secondary">
+                        <i class="fas fa-user"></i> Se connecter
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('chat') }}" class="btn btn-primary">
+                        <i class="fas fa-comments"></i> Discuter avec mon coach
+                    </a>
+                    <a href="{{ url_for('profile') }}" class="btn btn-secondary">
+                        <i class="fas fa-user-circle"></i> Mon profil
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="coach-selector">
+                    <div class="selector-header">
+                        <h3>Choisissez votre coach</h3>
+                        <p>Sélectionnez le style de coaching qui vous correspond</p>
+                    </div>
+                    
+                    <div class="coach-cards">
+                        <div class="coach-card maxence">
+                            <div class="coach-avatar">
+                                <img src="{{ url_for('static', filename='img/coaches/maxence.jpg') }}" alt="Coach Maxence">
+                            </div>
+                            <div class="coach-name">Maxence</div>
+                            <div class="coach-specialty">Expert en musculation</div>
+                            <div class="coach-badge">Intensif</div>
+                        </div>
+                        
+                        <div class="coach-card sofia">
+                            <div class="coach-avatar">
+                                <img src="{{ url_for('static', filename='img/coaches/sofia.jpg') }}" alt="Coach Sofia">
+                            </div>
+                            <div class="coach-name">Sofia</div>
+                            <div class="coach-specialty">Experte en bien-être</div>
+                            <div class="coach-badge">Équilibré</div>
+                        </div>
+                    </div>
+                    
+                    <div class="selector-footer">
+                        {% if not current_user.is_authenticated %}
+                        <a href="{{ url_for('register') }}" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Démarrer maintenant
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for('select_coach') }}" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Choisir mon coach
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="features">
-    <h2>Fonctionnalités</h2>
-    <div class="feature-cards">
-        <div class="feature-card">
-            <i class="fas fa-dumbbell"></i>
-            <h3>Programmes personnalisés</h3>
-            <p>Obtenez des programmes d'entraînement adaptés à votre niveau, objectifs et équipement disponible.</p>
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Pourquoi choisir FitCoach AI?</h2>
+            <p class="section-subtitle">Une approche révolutionnaire du fitness qui combine technologie de pointe et accompagnement personnalisé.</p>
         </div>
-        <div class="feature-card">
-            <i class="fas fa-apple-alt"></i>
-            <h3>Plans nutritionnels</h3>
-            <p>Recevez des conseils nutritionnels et des plans de repas adaptés à vos besoins et préférences.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-comments"></i>
-            <h3>Coach conversationnel</h3>
-            <p>Discutez avec votre coach IA pour obtenir des réponses à vos questions et un soutien motivationnel.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-chart-line"></i>
-            <h3>Suivi de progression</h3>
-            <p>Suivez vos progrès et recevez des ajustements à votre programme en fonction de vos résultats.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3 class="feature-title">Programmes personnalisés</h3>
+                <p class="feature-desc">Des programmes d'entraînement adaptés à votre niveau, vos objectifs et votre équipement, créés par intelligence artificielle et validés par des experts.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-apple-alt"></i>
+                </div>
+                <h3 class="feature-title">Nutrition sur mesure</h3>
+                <p class="feature-desc">Des plans nutritionnels adaptés à vos besoins, préférences et objectifs, avec des conseils pratiques pour intégrer de bonnes habitudes alimentaires.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="feature-title">Coach disponible 24/7</h3>
+                <p class="feature-desc">Posez vos questions, obtenez des conseils et de la motivation à tout moment. Votre coach AI est toujours là pour vous guider et vous encourager.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="feature-title">Suivi intelligent</h3>
+                <p class="feature-desc">Suivez vos progrès et recevez des ajustements en temps réel pour optimiser votre programme et atteindre vos objectifs plus rapidement.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3 class="feature-title">Objectifs personnalisés</h3>
+                <p class="feature-desc">Définissez vos objectifs spécifiques et suivez votre progression grâce à des jalons adaptés à votre parcours unique et votre niveau actuel.</p>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="cta">
-    <h2>Prêt à transformer votre fitness ?</h2>
-    <p>Commencez votre parcours de remise en forme avec un coach IA personnalisé dès aujourd'hui.</p>
-    {% if not current_user.is_authenticated %}
-    <a href="{{ url_for('register') }}" class="btn btn-primary">Commencer maintenant</a>
-    {% else %}
-    <a href="{{ url_for('chat') }}" class="btn btn-primary">Discuter avec votre coach</a>
-    {% endif %}
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container testimonials-container">
+        <div class="testimonials-header">
+            <h2 class="testimonials-title">Ce que disent nos utilisateurs</h2>
+            <p class="testimonials-subtitle">Découvrez les transformations et les succès de ceux qui ont choisi FitCoach AI.</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    J'ai essayé plusieurs applications de fitness, mais FitCoach AI est vraiment différent. Mon coach virtuel comprend mes besoins et adapte mon programme chaque semaine. J'ai perdu 15kg en 6 mois!
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Testimonial Author">
+                    </div>
+                    <div class="author-info">
+                        <div class="author-name">Sophie M.</div>
+                        <div class="author-role">Utilisatrice depuis 6 mois</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    Je suis surpris par la précision des conseils. Mon coach IA a compris que j'avais une blessure au genou et a adapté tous les exercices. Les résultats sont impressionnants sans aucune douleur!
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Testimonial Author">
+                    </div>
+                    <div class="author-info">
+                        <div class="author-name">Thomas L.</div>
+                        <div class="author-role">Utilisateur depuis 3 mois</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    La combinaison d'entraînement et de nutrition est parfaite. J'ai pris 6kg de muscle en suivant le programme de Maxence. La possibilité de discuter 24/7 fait toute la différence!
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Testimonial Author">
+                    </div>
+                    <div class="author-info">
+                        <div class="author-name">Antoine B.</div>
+                        <div class="author-role">Utilisateur depuis 8 mois</div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-container">
+            <div class="cta-shape cta-shape-1"></div>
+            <div class="cta-shape cta-shape-2"></div>
+            
+            <h2 class="cta-title">Prêt à transformer votre fitness?</h2>
+            <p class="cta-text">Rejoignez des milliers d'utilisateurs qui ont déjà changé leur vie avec FitCoach AI. Commencez votre parcours dès aujourd'hui!</p>
+            
+            <div class="cta-buttons">
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('register') }}" class="btn-cta">Commencer gratuitement</a>
+                <a href="{{ url_for('login') }}" class="btn-cta btn-cta-outline">Se connecter</a>
+                {% else %}
+                <a href="{{ url_for('chat') }}" class="btn-cta">Discuter avec mon coach</a>
+                <a href="{{ url_for('workout_plans') }}" class="btn-cta btn-cta-outline">Voir mes programmes</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
